@@ -1,1 +1,50 @@
-<p>taquilla works!</p>
+<mat-card>
+  <h1>Bienvenido a la Cinema Plaza San Javier</h1>
+  <mat-card>
+    <h3 class="peliculas-title">Peliculas</h3>
+    <mat-form-field>
+      <mat-label>Fechas</mat-label>
+      <mat-select
+        [(ngModel)]="selectedDate"
+        (ngModelChange)="handleDateChange()">
+        <mat-option *ngFor="let fecha of fechas" [value]="fecha">
+          {{fecha | date}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="complejo">
+      <mat-label>Complejo</mat-label>
+      <mat-select
+        [(value)]="currentComplejo.value">
+        <mat-option *ngFor="let complejo of complejos" [value]="complejo.value">
+          {{complejo.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card>
+  <mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>Selecciona tu pelicula</ng-template>
+      <!-- <form [formGroup]="firstFormGroup">
+        <mat-form-field>
+          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form> -->
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <ng-template matStepLabel>Selecciona tus asientos</ng-template>
+      <!-- <form [formGroup]="secondFormGroup">
+        <mat-form-field>
+          <input matInput placeholder="Address" formControlName="secondCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form> -->
+    </mat-step>
+  </mat-horizontal-stepper>  
+</mat-card>

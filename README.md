@@ -1,6 +1,7 @@
 # Taquilla
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.2.
+Make sure you are using Node 10.9
 
 ## Development server
 

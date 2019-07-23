@@ -25,26 +25,133 @@
   <mat-horizontal-stepper [linear]="true" #stepper>
     <mat-step [stepControl]="firstFormGroup">
       <ng-template matStepLabel>Selecciona tu pelicula</ng-template>
-      <!-- <form [formGroup]="firstFormGroup">
-        <mat-form-field>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperNext>Next</button>
+      <div class="peliculas-container">
+        <div
+          class="pelicula"
+          *ngFor="let pelicula of peliculas">
+          <mat-card>
+              <img [src]="pelicula.cartelUrl" alt="">
+              <mat-card-title>{{pelicula.nombre}}</mat-card-title>
+              <div class="horarios-container">
+                <div 
+                  *ngFor="let horario of pelicula.horarios">
+                  <div
+                    class="horario"
+                    (click)="handleHorarioSelection(horario, pelicula)">
+                    <h5
+                      class="hora"
+                      [ngClass]="{'active': horario.id === selectedHorario?.id }">
+                      {{horario.hora}}
+                    </h5>
+                    <h5 class="sala">{{horario.sala.nombre}}</h5>
+                  </div>
+                </div>
+              </div>
+          </mat-card>
         </div>
-      </form> -->
+      </div>
+      <mat-card *ngIf="selectedHorario">
+          <mat-card-title>Boletos: {{totalTickets}} - {{total | currency}}</mat-card-title>
+          <div>
+            <mat-card
+              class="precio-container"
+              *ngFor="let precio of selectedHorario.precios">
+              <div (click)="handleDecreaseButton(precio)">
+                  <mat-icon aria-hidden="false" aria-label="Example home icon">remove</mat-icon>
+              </div>
+              <div>
+                <h4>{{ precio.nombre }}</h4>
+                <h3>{{precio.boletos}}</h3>
+                <h5>$ {{ precio.precio }}</h5>
+              </div>
+              <div (click)="handleIncreaseButton(precio)">
+                  <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
+              </div>
+            </mat-card>
+          </div>
+          <div class="next-button" *ngIf="totalTickets > 0">
+            <button
+              mat-button
+              matStepperNext
+              (click)="handleNextButton()"><h3>Selecccionar asientos</h3></button>
+          </div>
+      </mat-card>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
+    <mat-step *ngIf="totalTickets > 0" [stepControl]="secondFormGroup">
       <ng-template matStepLabel>Selecciona tus asientos</ng-template>
-      <!-- <form [formGroup]="secondFormGroup">
-        <mat-form-field>
-          <input matInput placeholder="Address" formControlName="secondCtrl" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+      <div class="asientos-container">
+        <div class="movie-card">
+            <mat-card>
+              <img [src]="selectedMovie.cartelUrl" alt="">
+              <mat-card-title>{{selectedMovie.nombre}}</mat-card-title>
+              <div class="horarios-container">
+                <div
+                  class="horario">
+                  <h5
+                    class="hora">
+                    {{selectedHorario.hora}}
+                  </h5>
+                  <h5 class="sala">{{selectedHorario.sala.nombre}}</h5>
+                </div>
+              </div>
+          </mat-card>
         </div>
-      </form> -->
+        <div class="asientos">
+          <h2>Selecciona {{ totalTickets }} boletos</h2>
+          <div class="table-window">
+            <div class="seats-table-container">
+              <table>
+                <tr *ngFor="let row of seats">
+                  <td class="seat-letter">{{ row.asientos[0].fila }}</td>
+                  <td
+                    *ngFor="let seat of row.asientos"
+                    (click)="handleSeatButton(seat)"
+                    class="seat"
+                    [ngClass]="{'active': seat.active && !seat.ocupado, 'hidden': seat.tipo === 0, 'special': seat.tipo === 2, 'disabled': seat.ocupado }">
+                    {{seat.tipo !== 0 ? seat.numero <= 9 ? '0' + seat.numero : seat.numero  : ''}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="screen-section">
+            <p>pantalla</p>
+          </div>
+        </div>
+      </div>
+      <div
+        *ngIf="this.selectedSeats.length >= this.totalTickets"
+        class="print-button-container">
+          <button
+          mat-button
+          matStepperNext
+          (click)="handlePrintButton()"><h3>Imprimir asientos</h3></button>
+      </div>
     </mat-step>
   </mat-horizontal-stepper>  
 </mat-card>
+
+<div *ngIf="showPrintSection" class="hidden">
+  <div id="printJS-form" style="height: 385; width: 200px">
+    <div *ngFor="let asiento of selectedSeats">
+      <img src="/assets/logo.png" width="150px" height="auto" style="display: block; margin: 0 auto;">
+      <h4 style="text-align: center">{{selectedMovie.nombre}}</h4>
+      <p style="text-align: center">Clase {{selectedMovie.clasificacion}} | {{selectedMovie.duracion}}  | {{selectedMovie.idioma}} </p>
+      <p style="background: gray; color: white; text-align: center">{{selectedHorario.sala.nombre}} {{selectedHorario.hora}}
+        <span>{{asiento.nombre}}</span></p>
+      <p style="color: black; text-align: center;">{{selectedDate | date}}</p>
+      <p>Boleto: 1 Codigo 1</p>
+  
+      <hr style="border: 1x dotted black; width: 80%;">
+  
+      <p style="border: 1px solid black; color: black; text-align: center">{{selectedHorario.sala.nombre}} {{selectedHorario.hora}}</p>
+      <p style="color: black; text-align: center;">{{selectedDate | date}}</p>
+      <p>Boleto: 1 Codigo 1</p>
+      <hr style="border: 1x dotted black; width: 80%;">
+    </div>
+  </div>
+
+  <button id="imprimir" type="button" onclick="printJS('printJS-form', 'html')">
+    Print Form
+  </button>
+</div>

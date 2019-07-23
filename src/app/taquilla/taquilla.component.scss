@@ -10,3 +10,217 @@
 .complejo {
   margin-right: 25px;
 }
+
+.pelicula {
+  width: 20%;
+  display: inline-block;
+  margin-right: 5%;
+  margin-bottom: 25px;
+  vertical-align: top;
+  min-height: 300px;
+}
+
+.pelicula mat-card {
+  min-height: 415px;
+  text-align: center;
+}
+
+.pelicula img {
+  width: 200px;
+  min-height: 180px;
+  height: auto;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.horario {
+  border: 1px solid #E0E0E0;
+  width: fit-content;
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.horario h5 {
+  display: inline-block;
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+
+.hora {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.sala {
+  background-color: #E0E0E0;
+  color: white;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.active {
+  background-color: #EED228;
+}
+
+.precio-container {
+  width: 200px;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 10px;
+}
+
+.precio-container div {
+  width: 33%;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.precio-container div h4 {
+  margin-top: 0;
+}
+
+.next-button {
+  margin: 0 auto;
+  width: 250px;
+  margin-top: 25px;
+}
+
+.next-button button {
+  background-color: #004998;
+  color: #E0E0E0;
+}
+
+.asientos-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.movie-card {
+  width: 19%;
+  vertical-align: top;
+  position: relative;
+  display: inline-block;
+  margin-right: 1%;
+}
+
+.movie-card mat-card {
+  text-align: center;
+}
+
+.movie-card img {
+  width: 100%;
+  min-height: 180px;
+  height: auto;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.asientos {
+  width: 80%;
+  height: auto;
+  background-color: #252C36;
+  text-align: center;
+  vertical-align: top;
+  position: relative;
+  display: inline-block;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  border-radius: 2px;
+
+  h2 {
+    color: #FFF;
+    margin-top: 0px;
+  }
+
+  .room-name {
+    color: #6A7275;
+  }
+
+  .table-window {
+    overflow: scroll;
+  }
+
+  .table-window .seats-table-container {
+    width: 94%;
+    height: auto;
+    display: inline-block;
+
+    table {
+      width: 100%;
+      height: auto;
+      border-collapse: separate;
+      border-spacing: 5px;
+
+      tr {
+        height: auto;
+
+        .seat-letter {
+          color: #FFF;
+        }
+
+        .seat {
+          height: 3rem;
+          font-size: 1rem;
+          background-color: #6D6D6D;
+          border-radius: 5px 5px 0px 0px;
+          color: #FFF;
+        }
+
+        td.active {
+          background-color: #EED228;
+        }
+
+
+        td.hidden {
+          visibility: hidden;
+        }
+
+        td.special {
+          // background-image: url('../../assets/imgs/disability-icon.svg');
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+        }
+
+        td.disabled {
+          background-color: #000 !important;
+        }
+      }
+    }
+  }
+
+  .screen-section {
+    width: 90%;
+    height: 20px;
+    margin: 0 auto;
+    background-color: #7497B7;
+    border-radius: 2px;
+    padding-top: 4px;
+
+    p {
+      color: #fff;
+      text-transform: uppercase;
+      margin: 0px;
+    }
+  }
+}
+
+.print-button-container {
+  width: 100%;
+  text-align: right;
+  margin-top: 25px;
+}
+
+.print-button-container button {
+  background-color: #004998;
+  color: #E0E0E0;
+}
+

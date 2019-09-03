@@ -4,6 +4,7 @@ import { PeliculasService } from "../services/peliculas.service";
 import { SalasService } from "../services/salas.service";
 import { PagosService } from "../services/pagos.service";
 import { Router } from '@angular/router';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-taquilla',
@@ -28,12 +29,14 @@ export class TaquillaComponent implements OnInit {
   public seats: any;
   private selectedSeats: any = [];
   public showPrintSection: boolean = false;
+  public userName: string = this.oauthService.getIdentityClaims()['username'];
   
   constructor(
     private peliculasService: PeliculasService,
     private salasService: SalasService,
     private pagosService: PagosService,
     private router: Router,
+    private oauthService: OAuthService
   ) { }
 
   ngOnInit() {
@@ -44,6 +47,7 @@ export class TaquillaComponent implements OnInit {
   }
 
   private getPeliculas(date) {
+    this.peliculas = [];
     this.peliculasService.getPeliculas(date)
     .subscribe(response => {
       console.log(response);
@@ -71,7 +75,6 @@ export class TaquillaComponent implements OnInit {
   }
 
   private resetDataToDefaultValues() {
-    this.peliculas = [];
     this.selectedHorario = null;
     this.totalTickets = 0;
     this.total = 0;
@@ -182,7 +185,14 @@ export class TaquillaComponent implements OnInit {
     setTimeout(() => {
       let printButton = document.getElementById('imprimir');
       printButton.click();
+      this.showPrintSection = false;
+      this.resetDataToDefaultValues();
     }, 0);
+  }
+
+  public handleLogOut() {
+    console.log('Log out event');
+    this.oauthService.logOut();
     this.router.navigate(['/']);
   }
 }

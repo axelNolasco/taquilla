@@ -12,12 +12,6 @@ export class PagosService {
   ) { }
 
   public payTickets(horarioId, paymentData) {
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ec34e8fe2fcf881ec3e869363bc3390c0538af6c`
-    });
-    let options = { headers: headers };
-
-    return this.httpClient.post(`${this.apiUrl}/boletos/horario/${horarioId}/pagar`, paymentData, options);
+    return this.httpClient.post(`${this.apiUrl}/boletos/horario/${horarioId}/pagar`, paymentData);
   }
 }

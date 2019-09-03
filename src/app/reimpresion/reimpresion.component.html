@@ -1,2 +1,68 @@
-<p>reimpresion works!</p>
-<button (click)="handlePrintButton()">Imprimir</button>
+<mat-card>
+  <div class="header-container">
+    <h1 class="reimpresion-label">Reimprimir boletos</h1>
+    <div class="side-menu">
+      <button
+      mat-button
+      routerLink="/home"><h3>Volver</h3></button>
+    </div>
+  </div>
+
+  <mat-card>
+    <mat-card-title>Ingrese datos de busqueda</mat-card-title>
+    <br>
+    <mat-card-content>
+      <form [formGroup]="searchForm" (ngSubmit)="handleSearchEvent()">
+        <mat-form-field>
+          <input type="text" matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field>
+          <input type="date" matInput [min]="currentDate" placeholder="Date" formControlName="date">
+        </mat-form-field>
+        <button type="submit" mat-button>Buscar</button>
+      </form>
+
+    </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="showSearchResults" class="search-results">
+    <mat-card-content *ngIf="!ticketsFound" class="no-tickets">
+      <h2>Ningun ticket encontrado</h2>
+    </mat-card-content>
+    <mat-card-content *ngIf="ticketsFound" class="tickets-list">
+      <mat-card *ngFor="let ticket of ticketsFound" class="ticket">
+        <mat-card-title>{{ticket.pelicula}}</mat-card-title>
+        <mat-card-content>
+          <h3>{{ticket.sala}}</h3>
+          <h3>Hora: {{ticket.hora}}</h3>
+          <button mat-button class="print-button">Imprimir</button>
+        </mat-card-content>
+      </mat-card>
+    </mat-card-content>
+  </mat-card>
+</mat-card>
+
+<div *ngIf="showPrintSection" class="hidden">
+  <div id="printJS-form" style="height: 385; width: 200px">
+    <div *ngFor="let asiento of selectedSeats">
+      <img src="/assets/logo.png" width="150px" height="auto" style="display: block; margin: 0 auto;">
+      <h4 style="text-align: center">{{selectedMovie.nombre}}</h4>
+      <p style="text-align: center">Clase {{selectedMovie.clasificacion}} | {{selectedMovie.duracion}}  | {{selectedMovie.idioma}} </p>
+      <p style="background: gray; color: white; text-align: center">{{selectedHorario.sala.nombre}} {{selectedHorario.hora}}
+        <span>{{asiento.nombre}}</span></p>
+      <p style="color: black; text-align: center;">{{selectedDate | date}}</p>
+      <p>Boleto: 1 Codigo 1</p>
+  
+      <hr style="border: 1x dotted black; width: 80%;">
+  
+      <p style="border: 1px solid black; color: black; text-align: center">{{selectedHorario.sala.nombre}} {{selectedHorario.hora}}</p>
+      <p style="color: black; text-align: center;">{{selectedDate | date}}</p>
+      <p>Boleto: 1 Codigo 1</p>
+      <hr style="border: 1x dotted black; width: 80%;">
+    </div>
+  </div>
+
+  <button id="imprimir" type="button" onclick="printJS('printJS-form', 'html')">
+    Print Form
+  </button>
+</div>
+  

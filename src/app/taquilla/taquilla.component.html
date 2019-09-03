@@ -1,5 +1,16 @@
 <mat-card>
-  <h1>Bienvenido a la Cinema Plaza San Javier</h1>
+  <div class="header-container">
+    <h1 class="welcome-label">Bienvenido a la Cinema Plaza San Javier</h1>
+    <h5 class="user-id">{{ userName }}</h5>
+    <div class="side-menu">
+      <button
+      mat-button
+      routerLink="/reimpresion"><h3>Reimprimir boletos</h3></button>
+      <button
+      mat-button
+      (click)="handleLogOut()"><h3>Log out</h3></button>
+    </div>
+  </div>
   <mat-card>
     <h3 class="peliculas-title">Peliculas</h3>
     <mat-form-field>

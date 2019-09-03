@@ -1,0 +1,48 @@
+.header-container {
+  margin-bottom: 25px;
+}
+
+.reimpresion-label {
+  display: inline-block;
+}
+
+.side-menu {
+  float: right;
+}
+
+.side-menu button {
+  color: #FFFFFF;
+  background-color: #3f51b5;
+  min-width: 150px;
+  margin-left: 10px;
+}
+
+mat-form-field {
+  margin-right: 25px;
+}
+
+input {
+  width: 250px;
+}
+
+.no-tickets {
+  text-align: center;
+}
+
+.search-results {
+  margin-top: 25px;
+}
+
+.tickets-list {
+  text-align: left;
+}
+
+.ticket {
+  margin-bottom: 25px;
+}
+
+.print-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}

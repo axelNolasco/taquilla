@@ -34,7 +34,7 @@
     </mat-form-field>
   </mat-card>
   <mat-horizontal-stepper [linear]="true" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
+    <mat-step [stepControl]="1">
       <ng-template matStepLabel>Selecciona tu pelicula</ng-template>
       <div class="peliculas-container">
         <div
@@ -88,7 +88,7 @@
           </div>
       </mat-card>
     </mat-step>
-    <mat-step *ngIf="totalTickets > 0" [stepControl]="secondFormGroup">
+    <mat-step *ngIf="totalTickets > 0" [stepControl]="2">
       <ng-template matStepLabel>Selecciona tus asientos</ng-template>
       <div class="asientos-container">
         <div class="movie-card">

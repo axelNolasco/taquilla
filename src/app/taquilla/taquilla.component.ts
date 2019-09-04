@@ -27,7 +27,7 @@ export class TaquillaComponent implements OnInit {
   public total: number = 0;
   public selectedMovie: any;
   public seats: any;
-  private selectedSeats: any = [];
+  public selectedSeats: any = [];
   public showPrintSection: boolean = false;
   public userName: string = this.oauthService.getIdentityClaims()['username'];
   

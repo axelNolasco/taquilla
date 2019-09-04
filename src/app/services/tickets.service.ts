@@ -6,7 +6,7 @@ import { OAuthService } from 'angular-oauth2-oidc';
   providedIn: 'root',
 })
 export class TicketsService {
-  private apiUrl = 'https://taquilla.rodsoft.com.mx';
+  private apiUrl = 'https://taquilla.plazasanjavier.com';
 
   constructor(
     private httpClient: HttpClient,

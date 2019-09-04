@@ -10,8 +10,8 @@ export class AppComponent {
   title = 'taquilla';
 
   constructor(private oauthService: OAuthService) {
-    this.oauthService.tokenEndpoint = "https://taquilla.rodsoft.com.mx/oauth/token";
-    this.oauthService.userinfoEndpoint = "https://taquilla.rodsoft.com.mx/identity";
+    this.oauthService.tokenEndpoint = "https://taquilla.plazasanjavier.com/oauth/token";
+    this.oauthService.userinfoEndpoint = "https://taquilla.plazasanjavier.com/identity";
     this.oauthService.clientId = "taquillaClient";
     this.oauthService.scope = "openid offline_access";
     this.oauthService.dummyClientSecret = "@4816152342";

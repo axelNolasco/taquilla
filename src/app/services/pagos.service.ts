@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PagosService {
-  private apiUrl = 'https://taquilla.rodsoft.com.mx';
+  private apiUrl = 'https://taquilla.plazasanjavier.com';
 
   constructor(
     private httpClient: HttpClient

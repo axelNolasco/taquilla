@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class PeliculasService {
-  private apiUrl = 'https://api.rodsoft.com.mx';
+  private apiUrl = 'https://mobile.plazasanjavier.com';
 
   constructor(
     private httpClient: HttpClient

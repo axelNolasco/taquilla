@@ -50,13 +50,39 @@ export class ReimpresionComponent implements OnInit {
     });
   }
 
-  private handlePrintButton() {
-    this.showPrintSection = true;
-    setTimeout(() => {
-      let printButton = document.getElementById('imprimir');
-      printButton.click();
-      this.showPrintSection = false;
-      this.router.navigate(['/home']);
-    }, 0);
+  public handlePrintButton(ticketData) {
+    console.log(ticketData);
+    let printData: any = {
+      pelicula: ticketData.pelicula,
+      clasificacion: ticketData.clasificacion,
+      duracion: ticketData.duracion,
+      idioma: ticketData.idioma,
+      fecha: ticketData.fecha,
+      boleto: ticketData.id,
+      codigo: ticketData.id,
+      sala: ticketData.sala,
+      horario: ticketData.hora,
+      seat: []
+    };
+
+    ticketData.asientos.forEach(seat => printData.seat.push(seat.nombre));
+    console.log(printData);
+    this.ticketsService.printTickets(printData)
+    .subscribe((response: any) => {
+      console.log(response);
+    }, error => {
+      console.log(error);
+    });
+    this.markTicketAsInvalid(ticketData.hash);
+  }
+  
+  private markTicketAsInvalid(hash) {
+    this.ticketsService.getTicketReimpresion(hash)
+    .subscribe((response: any) => {
+      console.log(response);
+      this.router.navigate(['taquilla']);
+    }, error => {
+      console.log(error);
+    });
   }
 }

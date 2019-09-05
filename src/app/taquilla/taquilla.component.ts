@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { PeliculasService } from "../services/peliculas.service";
 import { SalasService } from "../services/salas.service";
 import { PagosService } from "../services/pagos.service";
+import { TicketsService } from "../services/tickets.service";
 import { Router } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 
@@ -30,20 +31,26 @@ export class TaquillaComponent implements OnInit {
   public selectedSeats: any = [];
   public showPrintSection: boolean = false;
   public userName: string = this.oauthService.getIdentityClaims()['username'];
+  public reimpresionAccess: boolean = true;
   
   constructor(
     private peliculasService: PeliculasService,
     private salasService: SalasService,
     private pagosService: PagosService,
     private router: Router,
-    private oauthService: OAuthService
+    private oauthService: OAuthService,
+    private ticketsService: TicketsService
   ) { }
 
   ngOnInit() {
+    this.checkReimpresionAccess();
     this.getPeliculas('');
     this.getFechas();
-    console.log(this.currentComplejo);
-    
+  }
+
+  private checkReimpresionAccess() {
+    let userData: any = this.oauthService.getIdentityClaims();
+    this.reimpresionAccess = userData.permisos.some(access => access.key.includes('reimpresion'));
   }
 
   private getPeliculas(date) {
@@ -119,7 +126,7 @@ export class TaquillaComponent implements OnInit {
   }
 
   private getRoomData() {
-    const salaId = this.selectedHorario.sala.id;
+    const salaId = this.selectedHorario.id;
     this.salasService.getSalaById(salaId)
     .subscribe(response => {
       console.log(response);
@@ -172,22 +179,38 @@ export class TaquillaComponent implements OnInit {
 
     this.selectedSeats.forEach(seat => paymentData.asientos.push(seat.id));
     this.pagosService.payTickets(horarioId, paymentData)
-    .subscribe(response => {
+    .subscribe((response: any) => {
       console.log(response);
-      this.printTickets();
+      this.printTickets(response.id);
     }, error => {
       console.log(error);
     })
   }
 
-  private printTickets() {
-    this.showPrintSection = true;
-    setTimeout(() => {
-      let printButton = document.getElementById('imprimir');
-      printButton.click();
-      this.showPrintSection = false;
-      this.resetDataToDefaultValues();
-    }, 0);
+  private printTickets(id) {
+    let printData: any = {
+      pelicula: this.selectedMovie.nombre,
+      clasificacion: this.selectedMovie.clasificacion,
+      duracion: this.selectedMovie.duracion,
+      idioma: this.selectedMovie.idioma,
+      fecha: this.selectedDate,
+      boleto: id,
+      codigo: id,
+      sala: this.selectedHorario.sala.nombre,
+      horario: this.selectedHorario.hora,
+      seat: []
+    };
+    this.selectedSeats.forEach(seat => printData.seat.push(seat.nombre));
+    console.log(printData);
+    this.resetDataToDefaultValues();
+    this.ticketsService.printTickets(printData)
+    .subscribe((response: any) => {
+      console.log(response);
+    }, error => {
+      console.log(error);
+    });
+    // let printButton = document.getElementById('imprimir');
+    // printButton.click();
   }
 
   public handleLogOut() {

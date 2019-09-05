@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
         // Loading data about the user
         return this.oauthService.loadUserProfile();
       }).then((response) => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/taquilla']);
       })
       .catch(err => {
         console.log('err =>', err);

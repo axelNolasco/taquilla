@@ -4,6 +4,7 @@
     <h5 class="user-id">{{ userName }}</h5>
     <div class="side-menu">
       <button
+      *ngIf="reimpresionAccess"
       mat-button
       routerLink="/reimpresion"><h3>Reimprimir boletos</h3></button>
       <button
@@ -142,7 +143,7 @@
   </mat-horizontal-stepper>  
 </mat-card>
 
-<div *ngIf="showPrintSection" class="hidden">
+<!-- <div *ngIf="showPrintSection" class="hidden">
   <div id="printJS-form" style="height: 385; width: 200px">
     <div *ngFor="let asiento of selectedSeats">
       <img src="/assets/logo.png" width="150px" height="auto" style="display: block; margin: 0 auto;">
@@ -165,4 +166,4 @@
   <button id="imprimir" type="button" onclick="printJS('printJS-form', 'html')">
     Print Form
   </button>
-</div>
+</div> -->

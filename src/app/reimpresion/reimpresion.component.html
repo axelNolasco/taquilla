@@ -4,7 +4,7 @@
     <div class="side-menu">
       <button
       mat-button
-      routerLink="/home"><h3>Volver</h3></button>
+      routerLink="/taquilla"><h3>Volver</h3></button>
     </div>
   </div>
 
@@ -34,7 +34,7 @@
         <mat-card-content>
           <h3>{{ticket.sala}}</h3>
           <h3>Hora: {{ticket.hora}}</h3>
-          <button mat-button class="print-button">Imprimir</button>
+          <button mat-button class="print-button" (click)="handlePrintButton(ticket)">Imprimir</button>
         </mat-card-content>
       </mat-card>
     </mat-card-content>

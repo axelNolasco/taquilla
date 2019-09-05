@@ -247,3 +247,7 @@
   position: absolute;
   top: 60px;
 }
+
+@media print {
+  #printJS-form { page-break-after: always; }
+}

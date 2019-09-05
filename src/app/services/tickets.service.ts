@@ -13,7 +13,16 @@ export class TicketsService {
     private oauthService: OAuthService
   ) { }
 
-  public getSalaByEmailAndDate(email, date) {
+  public getSalaByEmailAndDate(email: string, date: string) {
     return this.httpClient.get(`${this.apiUrl}/boletos/${email}/${date}`);
+  }
+
+  public getTicketReimpresion(hash: string) {
+    return this.httpClient.get(`${this.apiUrl}/boletos/${hash}`);
+  }
+
+  public printTickets(ticketsData) {
+    console.log(ticketsData);
+    return this.httpClient.post(`http://localhost/print`, ticketsData);
   }
 }

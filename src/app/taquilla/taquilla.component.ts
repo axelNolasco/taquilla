@@ -190,16 +190,18 @@ export class TaquillaComponent implements OnInit {
 
   private printTickets(id) {
     let printData: any = {
+      user: this.userName,
       pelicula: this.selectedMovie.nombre,
       clasificacion: this.selectedMovie.clasificacion,
       duracion: this.selectedMovie.duracion,
       idioma: this.selectedMovie.idioma,
-      fecha: this.selectedDate,
+      fecha: this.parseDate(this.selectedDate),
       boleto: id,
       codigo: id,
       sala: this.selectedHorario.sala.nombre,
       horario: this.selectedHorario.hora,
-      seat: []
+      seat: [],
+      precios: this.selectedHorario.precios
     };
     this.selectedSeats.forEach(seat => printData.seat.push(seat.nombre));
     console.log(printData);
@@ -212,6 +214,17 @@ export class TaquillaComponent implements OnInit {
     });
     // let printButton = document.getElementById('imprimir');
     // printButton.click();
+  }
+
+  private parseDate(date) {
+    let newdate = new Date(date);
+    let dia =  newdate.toLocaleString("es", { weekday: 'long' });
+    let diaNumber =  newdate.toLocaleString("es", { day: "numeric" });
+    let month =  newdate.toLocaleString("es", { month: "long" });
+    let year = newdate.toLocaleString("es", { year: "numeric"});
+    let newDformat =  dia.charAt(0).toUpperCase() + dia.slice(1) + " " + diaNumber + " " +  month.charAt(0).toUpperCase() + month.slice(1) + " " + year;
+
+    return newDformat;
   }
 
   public handleLogOut() {

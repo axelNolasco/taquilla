@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TicketsService } from '../services/tickets.service';
 import { Router } from '@angular/router';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-reimpresion',
@@ -19,13 +20,30 @@ export class ReimpresionComponent implements OnInit {
   public ticketsFound: any[];
   public showSearchResults: boolean = false;
   public showPrintSection: boolean = false;
+  public userTickets: any;
+  public userName: string = this.oauthService.getIdentityClaims()['username'];
 
   constructor(
     private ticketsService: TicketsService,
-    private router: Router
+    private router: Router,
+    private oauthService: OAuthService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getCurrentUserTickets();
+  }
+
+  private getCurrentUserTickets() {
+    console.log('getCurrentUserTickets method');
+    
+    this.ticketsService.getCurrentUserTickets()
+    .subscribe((response: any) => {
+      console.log('getCurrentUserTickets success', response);
+      this.userTickets = response;
+    }, error => {
+      console.log('getCurrentUserTickets success', error);      
+    });
+  }
 
   public handleSearchEvent() {
     if (this.searchForm.valid) {
@@ -53,16 +71,18 @@ export class ReimpresionComponent implements OnInit {
   public handlePrintButton(ticketData) {
     console.log(ticketData);
     let printData: any = {
+      user: this.userName,
       pelicula: ticketData.pelicula,
       clasificacion: ticketData.clasificacion,
       duracion: ticketData.duracion,
       idioma: ticketData.idioma,
-      fecha: ticketData.fecha,
+      fecha: this.parseDate(ticketData.fecha),
       boleto: ticketData.id,
       codigo: ticketData.id,
       sala: ticketData.sala,
       horario: ticketData.hora,
-      seat: []
+      seat: [],
+      precios: ticketData.preciosCount
     };
 
     ticketData.asientos.forEach(seat => printData.seat.push(seat.nombre));
@@ -73,16 +93,16 @@ export class ReimpresionComponent implements OnInit {
     }, error => {
       console.log(error);
     });
-    this.markTicketAsInvalid(ticketData.hash);
   }
-  
-  private markTicketAsInvalid(hash) {
-    this.ticketsService.getTicketReimpresion(hash)
-    .subscribe((response: any) => {
-      console.log(response);
-      this.router.navigate(['taquilla']);
-    }, error => {
-      console.log(error);
-    });
+
+  private parseDate(date) {
+    let newdate = new Date(date);
+    let dia =  newdate.toLocaleString("es", { weekday: 'long' });
+    let diaNumber =  newdate.toLocaleString("es", { day: "numeric" });
+    let month =  newdate.toLocaleString("es", { month: "long" });
+    let year = newdate.toLocaleString("es", { year: "numeric"});
+    let newDformat =  dia.charAt(0).toUpperCase() + dia.slice(1) + " " + diaNumber + " " +  month.charAt(0).toUpperCase() + month.slice(1) + " " + year;
+
+    return newDformat;
   }
 }

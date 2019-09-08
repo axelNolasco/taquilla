@@ -17,8 +17,8 @@ export class TicketsService {
     return this.httpClient.get(`${this.apiUrl}/boletos/${email}/${date}`);
   }
 
-  public getTicketReimpresion(hash: string) {
-    return this.httpClient.get(`${this.apiUrl}/boletos/${hash}`);
+  public getCurrentUserTickets() {
+    return this.httpClient.get(`${this.apiUrl}/boletos`);
   }
 
   public printTickets(ticketsData) {

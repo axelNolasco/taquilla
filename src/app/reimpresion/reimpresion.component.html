@@ -8,37 +8,59 @@
     </div>
   </div>
 
-  <mat-card>
-    <mat-card-title>Ingrese datos de busqueda</mat-card-title>
-    <br>
-    <mat-card-content>
-      <form [formGroup]="searchForm" (ngSubmit)="handleSearchEvent()">
-        <mat-form-field>
-          <input type="text" matInput placeholder="Email" formControlName="email">
-        </mat-form-field>
-        <mat-form-field>
-          <input type="date" matInput [min]="currentDate" placeholder="Date" formControlName="date">
-        </mat-form-field>
-        <button type="submit" mat-button>Buscar</button>
-      </form>
-
-    </mat-card-content>
-  </mat-card>
-  <mat-card *ngIf="showSearchResults" class="search-results">
-    <mat-card-content *ngIf="!ticketsFound" class="no-tickets">
-      <h2>Ningun ticket encontrado</h2>
-    </mat-card-content>
-    <mat-card-content *ngIf="ticketsFound" class="tickets-list">
-      <mat-card *ngFor="let ticket of ticketsFound" class="ticket">
-        <mat-card-title>{{ticket.pelicula}}</mat-card-title>
-        <mat-card-content>
-          <h3>{{ticket.sala}}</h3>
-          <h3>Hora: {{ticket.hora}}</h3>
-          <button mat-button class="print-button" (click)="handlePrintButton(ticket)">Imprimir</button>
-        </mat-card-content>
-      </mat-card>
-    </mat-card-content>
-  </mat-card>
+  <div class="search-container">
+    <mat-card>
+      <mat-card-title>Ingrese datos de busqueda</mat-card-title>
+      <br>
+      <mat-card-content>
+        <form [formGroup]="searchForm" (ngSubmit)="handleSearchEvent()">
+          <mat-form-field>
+            <input type="text" matInput placeholder="Email" formControlName="email">
+          </mat-form-field>
+          <mat-form-field>
+            <input type="date" matInput [min]="currentDate" placeholder="Date" formControlName="date">
+          </mat-form-field>
+          <button type="submit" mat-button>Buscar</button>
+        </form>
+  
+      </mat-card-content>
+    </mat-card>
+    <mat-card *ngIf="showSearchResults" class="search-results">
+      <mat-card-content *ngIf="!ticketsFound" class="no-tickets">
+        <h2>Ningun ticket encontrado</h2>
+      </mat-card-content>
+      <mat-card-content *ngIf="ticketsFound" class="tickets-list">
+        <mat-card *ngFor="let ticket of ticketsFound" class="ticket">
+          <mat-card-title>{{ticket.pelicula}}</mat-card-title>
+          <mat-card-content>
+            <h3>{{ticket.sala}}</h3>
+            <h3>Hora: {{ticket.hora}}</h3>
+            <button mat-button class="print-button" (click)="handlePrintButton(ticket)">Imprimir</button>
+          </mat-card-content>
+        </mat-card>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <br><br>
+  <div class="user-tickets-container">
+    <mat-card>
+      <mat-card-title>Seleccione ticket por venta</mat-card-title>
+      <mat-card-content *ngIf="!userTickets" class="no-tickets">
+        <h2>Ningun ticket encontrado</h2>
+      </mat-card-content>
+      <mat-card-content *ngIf="userTickets" class="tickets-list">
+        <mat-card *ngFor="let ticket of userTickets" class="ticket">
+          <mat-card-title>{{ticket.pelicula}}</mat-card-title>
+          <mat-card-content>
+            <h3>{{ticket.sala}}</h3>
+            <h3>Hora: {{ticket.hora}}</h3>
+            <button mat-button class="print-button" (click)="handlePrintButton(ticket)">Imprimir</button>
+          </mat-card-content>
+        </mat-card>
+      </mat-card-content>
+      <br>
+    </mat-card>
+  </div>
 </mat-card>
 
 <!-- <div *ngIf="showPrintSection" class="hidden">

@@ -92,6 +92,7 @@ export class TaquillaComponent implements OnInit {
 
   public handleHorarioSelection(horario, pelicula) {
     console.log(horario);
+    this.resetDataToDefaultValues();
     this.selectedHorario = horario;
     this.selectedMovie = pelicula;
     this.selectedHorario.precios.map(precio => precio.boletos = 0);

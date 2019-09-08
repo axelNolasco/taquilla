@@ -107,6 +107,14 @@
                 </div>
               </div>
           </mat-card>
+          <div
+            *ngIf="this.selectedSeats.length >= this.totalTickets"
+            class="print-button-container">
+              <button
+              mat-button
+              matStepperNext
+              (click)="handlePrintButton()"><h3>Imprimir asientos</h3></button>
+          </div>
         </div>
         <div class="asientos">
           <h2>Selecciona {{ totalTickets }} boletos</h2>
@@ -130,14 +138,6 @@
             <p>pantalla</p>
           </div>
         </div>
-      </div>
-      <div
-        *ngIf="this.selectedSeats.length >= this.totalTickets"
-        class="print-button-container">
-          <button
-          mat-button
-          matStepperNext
-          (click)="handlePrintButton()"><h3>Imprimir asientos</h3></button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>  

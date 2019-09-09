@@ -23,6 +23,6 @@ export class TicketsService {
 
   public printTickets(ticketsData) {
     console.log(ticketsData);
-    return this.httpClient.post(`http://localhost/print`, ticketsData);
+    return this.httpClient.post(`http://localhost/print/index.php`, ticketsData);
   }
 }

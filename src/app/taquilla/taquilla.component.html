@@ -128,7 +128,7 @@
                     (click)="handleSeatButton(seat)"
                     class="seat"
                     [ngClass]="{'active': seat.active && !seat.ocupado, 'hidden': seat.tipo === 0, 'special': seat.tipo === 2, 'disabled': seat.ocupado }">
-                    {{seat.tipo !== 0 ? seat.numero <= 9 ? '0' + seat.numero : seat.numero  : ''}}
+                    {{seat.tipo !== 0 ? seat.numero <= 9 ? '' + seat.fila  +  seat.numero : '' + seat.fila +  seat.numero  : ''}}
                   </td>
                 </tr>
               </table>

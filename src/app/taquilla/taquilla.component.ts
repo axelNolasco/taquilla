@@ -138,6 +138,7 @@ export class TaquillaComponent implements OnInit {
   }
 
   public handleSeatButton(seat) {
+    debugger
     if (seat.tipo == 0  || seat.ocupado === true) {
       return;
     }

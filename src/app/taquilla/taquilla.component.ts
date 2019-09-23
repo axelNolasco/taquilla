@@ -29,6 +29,7 @@ export class TaquillaComponent implements OnInit {
   public selectedMovie: any;
   public seats: any;
   public selectedSeats: any = [];
+  public selectedPrecios: any = [];
   public showPrintSection: boolean = false;
   public userName: string = this.oauthService.getIdentityClaims()['username'];
   public reimpresionAccess: boolean = true;
@@ -88,6 +89,7 @@ export class TaquillaComponent implements OnInit {
     this.selectedMovie = null;
     this.seats = [];
     this.selectedSeats = [];
+    this.selectedPrecios = [];
   }
 
   public handleHorarioSelection(horario, pelicula) {
@@ -108,18 +110,32 @@ export class TaquillaComponent implements OnInit {
     this.totalTickets--;
     precio.boletos--;
     this.total -= Number(precio.precio);
+    this.removePrecio(precio.id);
   }
-  
+
   public handleIncreaseButton(precio) {
     console.info('handleIncreaseNormalButton method', precio);
     
-    if(this.totalTickets >= 8 || precio.boletos >= 8) {
+   /* if(this.totalTickets >= 8 || precio.boletos >= 8) {
       return;
-    }
+    }*/
     
     this.totalTickets++;
     precio.boletos++;
     this.total += Number(precio.precio);
+    this.addPrecio(precio.id);
+  }
+
+  private addPrecio(id) {
+    this.selectedPrecios.push(id);
+  }
+  
+  private removePrecio(id) {
+    this.selectedPrecios.forEach((currentPrecio, index) => {
+      if(currentPrecio === id) {
+        this.selectedPrecios.splice(index, 1); 
+      }
+    });
   }
 
   public handleNextButton() {
@@ -138,7 +154,6 @@ export class TaquillaComponent implements OnInit {
   }
 
   public handleSeatButton(seat) {
-    debugger
     if (seat.tipo == 0  || seat.ocupado === true) {
       return;
     }
@@ -176,7 +191,8 @@ export class TaquillaComponent implements OnInit {
     const horarioId = this.selectedHorario.id;
     const paymentData: any = {
       type: "taquilla",
-	    asientos: []
+      asientos: [],
+      precios: this.selectedPrecios
     };
 
     this.selectedSeats.forEach(seat => paymentData.asientos.push(seat.id));
@@ -202,7 +218,8 @@ export class TaquillaComponent implements OnInit {
       sala: this.selectedHorario.sala.nombre,
       horario: this.selectedHorario.hora,
       seat: [],
-      precios: this.selectedHorario.precios
+      precios: this.selectedHorario.precios,
+      reImprecion: false
     };
     this.selectedSeats.forEach(seat => printData.seat.push(seat.nombre));
     console.log(printData);

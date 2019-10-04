@@ -172,6 +172,7 @@
           background-color: #50C878;
           border-radius: 5px 5px 0px 0px;
           color: #FFF;
+          cursor: pointer;
         }
 
         td.active {
@@ -217,6 +218,7 @@
   width: 100%;
   text-align: center;
   margin-top: 25px;
+  color: white;
 }
 
 .print-button-container button {
@@ -250,4 +252,10 @@
 
 @media print {
   #printJS-form { page-break-after: always; }
+}
+
+.button-select-seat {
+  display: inline-block;
+  margin-top: 43px;
+  color: white;
 }

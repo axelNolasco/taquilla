@@ -80,12 +80,12 @@
                   <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
               </div>
             </mat-card>
-          </div>
-          <div class="next-button" *ngIf="totalTickets > 0">
-            <button
-              mat-button
-              matStepperNext
-              (click)="handleNextButton()"><h3>Selecccionar asientos</h3></button>
+            <div class="next-button button-select-seat" *ngIf="totalTickets > 0">
+              <button
+                mat-button
+                matStepperNext
+                (click)="handleNextButton()"><h3>Selecccionar asientos</h3></button>
+            </div>
           </div>
       </mat-card>
     </mat-step>

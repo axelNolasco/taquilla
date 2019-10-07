@@ -38,7 +38,10 @@ input {
 }
 
 .ticket {
-  margin-bottom: 25px;
+  display: inline-block;
+  padding: 20px;
+  margin: 10px;
+  min-width: 200px;
 }
 
 .print-button {

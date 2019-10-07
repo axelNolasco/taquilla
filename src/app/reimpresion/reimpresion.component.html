@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <div class="search-container">
+  <!--<div class="search-container">
     <mat-card>
       <mat-card-title>Ingrese datos de busqueda</mat-card-title>
       <br>
@@ -40,7 +40,7 @@
         </mat-card>
       </mat-card-content>
     </mat-card>
-  </div>
+  </div>-->
   <br><br>
   <div class="user-tickets-container">
     <mat-card>
@@ -53,6 +53,7 @@
           <mat-card-title>{{ticket.pelicula}}</mat-card-title>
           <mat-card-content>
             <h3>{{ticket.sala}}</h3>
+            <h3>Asientos {{ticket.asientos.length}}</h3>
             <h3>Hora: {{ticket.hora}}</h3>
             <button mat-button class="print-button" (click)="handlePrintButton(ticket)">Imprimir</button>
           </mat-card-content>

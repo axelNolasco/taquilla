@@ -12,6 +12,7 @@ import { MaterialModule } from "./shared/angular-material.module";
 import { TaquillaComponent } from './taquilla/taquilla.component';
 import { ReimpresionComponent } from './reimpresion/reimpresion.component';
 import { LoginComponent } from './login/login.component';
+import { CarteleraComponent } from './cartelera/cartelera.component';
 
 import { PeliculasService } from "./services/peliculas.service";
 import { SalasService } from "./services/salas.service";
@@ -27,6 +28,7 @@ import { TokenInterceptor } from './token.interceptor';
     TaquillaComponent,
     ReimpresionComponent,
     LoginComponent,
+    CarteleraComponent,
   ],
   imports: [
     BrowserModule,

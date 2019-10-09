@@ -1,0 +1,108 @@
+.peliculas-title {
+    display: inline-block;
+  }
+  
+  .mat-form-field {
+    float: right;
+    width: 250px;
+  }
+  
+  .complejo {
+    margin-right: 25px;
+  }
+  
+  .pelicula {
+    width: 13%;
+    display: inline-block;
+    margin-right: 1%;
+    margin-bottom: 25px;
+    vertical-align: top;
+    min-height: 300px;
+  }
+  
+  .pelicula mat-card {
+    min-height: 415px;
+    text-align: center;
+  }
+  
+  .pelicula img {
+    width: 200px;
+    min-height: 180px;
+    height: auto;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .horario {
+    border: 1px solid #E0E0E0;
+    width: fit-content;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .horario h5 {
+    display: inline-block;
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .hora {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .sala {
+    background-color: #a6a6a6;
+    color: white;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  
+  .movie-card {
+    width: 19%;
+    vertical-align: top;
+    position: relative;
+    display: inline-block;
+    margin-right: 1%;
+  }
+  
+  .movie-card mat-card {
+    text-align: center;
+  }
+  
+  .movie-card img {
+    width: 100%;
+    min-height: 180px;
+    height: auto;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .header-container {
+    margin-bottom: 25px;
+  }
+  
+  .welcome-label {
+    display: inline-block;
+  }
+  
+  .side-menu {
+    float: right;
+  }
+  
+  .side-menu button {
+    color: #FFFFFF;
+    background-color: #3f51b5;
+    min-width: 150px;
+    margin-left: 10px;
+  }
+  
+  .margin-bottom {
+      margin-bottom: 30px;
+  }

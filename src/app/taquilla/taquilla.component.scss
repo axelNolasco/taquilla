@@ -58,14 +58,14 @@
 }
 
 .sala {
-  background-color: #E0E0E0;
+  background-color: #a6a6a6;
   color: white;
   padding-right: 10px;
   padding-left: 10px;
 }
 
 .active {
-  background-color: #EED228;
+  background-color: #87d9e5;
 }
 
 .precio-container {
@@ -94,7 +94,7 @@
 
 .next-button button {
   background-color: #004998;
-  color: #E0E0E0;
+  color: white;
 }
 
 .asientos-container {
@@ -176,7 +176,7 @@
         }
 
         td.active {
-          background-color: #EED228;
+          background-color: #ff9e05;
         }
 
 
@@ -192,7 +192,7 @@
         }
 
         td.disabled {
-          background-color: #000 !important;
+          background-color: #373f4b !important;
         }
       }
     }
@@ -218,12 +218,12 @@
   width: 100%;
   text-align: center;
   margin-top: 25px;
-  color: white;
+  color: white !important;
 }
 
 .print-button-container button {
   background-color: #004998;
-  color: #E0E0E0;
+  color: white;
 }
 
 .header-container {

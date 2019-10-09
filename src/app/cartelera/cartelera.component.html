@@ -1,0 +1,48 @@
+<mat-card>
+
+    <div class="header-container">
+        <h1 class="welcome-label">Bienvenido a la Cinema Plaza San Javier</h1>
+        <div class="side-menu">
+            <button mat-button routerLink="/login"><h3>Login</h3></button>
+        </div>
+    </div>
+
+    <mat-card class="margin-bottom">
+        <h3 class="peliculas-title">Peliculas</h3>
+        
+        <mat-form-field>
+            <mat-label>Fechas</mat-label>
+            <mat-select
+            [(ngModel)]="selectedDate"
+            (ngModelChange)="handleDateChange()">
+            <mat-option *ngFor="let fecha of fechas" [value]="fecha">
+                {{fecha | date}}
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-card>
+
+        <div
+          class="pelicula"
+          *ngFor="let pelicula of peliculas">
+          <mat-card>
+              <img [src]="pelicula.cartelUrl" alt="">
+              <mat-card-title>{{pelicula.nombre}}</mat-card-title>
+              <div class="horarios-container">
+                <div 
+                  *ngFor="let horario of pelicula.horarios">
+                  <div
+                    class="horario"
+                    (click)="handleHorarioSelection(horario, pelicula)">
+                    <h5
+                      class="hora"
+                      [ngClass]="{'active': horario.id === selectedHorario?.id }">
+                      {{horario.hora}}
+                    </h5>
+                    <h5 class="sala">{{horario.sala.nombre}}</h5>
+                  </div>
+                </div>
+              </div>
+          </mat-card>
+        </div>
+</mat-card>

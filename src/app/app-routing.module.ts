@@ -3,11 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { TaquillaComponent } from "../app/taquilla/taquilla.component";
 import { ReimpresionComponent } from "../app/reimpresion/reimpresion.component";
 import { LoginComponent } from "../app/login/login.component";
+import { CarteleraComponent } from "../app/cartelera/cartelera.component";
 import { AuthGuard } from './app.guard';
 
 const routes: Routes = [
   {
     path: '',
+    component: CarteleraComponent
+  },
+  {
+    path: 'login',
     component: LoginComponent
   },
   {

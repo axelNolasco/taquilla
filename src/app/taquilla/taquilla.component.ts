@@ -30,6 +30,7 @@ export class TaquillaComponent implements OnInit {
   public seats: any;
   public selectedSeats: any = [];
   public selectedPrecios: any = [];
+  public preciosToPrint: any = [];
   public showPrintSection: boolean = false;
   public userName: string = this.oauthService.getIdentityClaims()['username'];
   public reimpresionAccess: boolean = true;
@@ -93,7 +94,6 @@ export class TaquillaComponent implements OnInit {
   }
 
   public handleHorarioSelection(horario, pelicula) {
-    console.log(horario);
     this.resetDataToDefaultValues();
     this.selectedHorario = horario;
     this.selectedMovie = pelicula;
@@ -101,8 +101,6 @@ export class TaquillaComponent implements OnInit {
   }
 
   public handleDecreaseButton(precio) {
-    console.info('handleDecreaseNormalButton method', precio);
-
     if(this.totalTickets <= 0 || precio.boletos <= 0) {
       return;
     }
@@ -113,13 +111,7 @@ export class TaquillaComponent implements OnInit {
     this.removePrecio(precio.id);
   }
 
-  public handleIncreaseButton(precio) {
-    console.info('handleIncreaseNormalButton method', precio);
-    
-   /* if(this.totalTickets >= 8 || precio.boletos >= 8) {
-      return;
-    }*/
-    
+  public handleIncreaseButton(precio) { 
     this.totalTickets++;
     precio.boletos++;
     this.total += Number(precio.precio);
@@ -128,14 +120,29 @@ export class TaquillaComponent implements OnInit {
 
   private addPrecio(id) {
     this.selectedPrecios.push(id);
+    for (var i = 0; i < this.selectedHorario.precios.length; i++) {
+      if (this.selectedHorario.precios[i].id == id) {
+        this.preciosToPrint.push(this.selectedHorario.precios[i]);
+        break;
+      }
+    }
+    console.log(this.preciosToPrint);
   }
   
   private removePrecio(id) {
-    this.selectedPrecios.forEach((currentPrecio, index) => {
-      if(currentPrecio === id) {
-        this.selectedPrecios.splice(index, 1); 
+    for (var i = 0; i < this.selectedPrecios.length; i++) {
+      if (this.selectedPrecios[i] == id) {
+        this.selectedPrecios.splice(i, 1);
+        break;
       }
-    });
+    }
+    for (var i = 0; i < this.preciosToPrint.length; i++) {
+      if (this.preciosToPrint[i].id == id) {
+        this.preciosToPrint.splice(i, 1);
+        break;
+      }
+    }
+    console.log(this.preciosToPrint);
   }
 
   public handleNextButton() {
@@ -146,7 +153,7 @@ export class TaquillaComponent implements OnInit {
     const salaId = this.selectedHorario.id;
     this.salasService.getSalaById(salaId)
     .subscribe(response => {
-      console.log(response);
+      
       this.seats = response['distribucion'];
     }, error => {
       console.log(error);
@@ -187,7 +194,7 @@ export class TaquillaComponent implements OnInit {
     this.payTickets();
   }
 
-  private payTickets() {
+  private payTickets() {    
     const horarioId = this.selectedHorario.id;
     const paymentData: any = {
       type: "taquilla",
@@ -198,7 +205,7 @@ export class TaquillaComponent implements OnInit {
     this.selectedSeats.forEach(seat => paymentData.asientos.push(seat.id));
     this.pagosService.payTickets(horarioId, paymentData)
     .subscribe((response: any) => {
-      console.log(response);
+      
       this.printTickets(response.id);
     }, error => {
       console.log(error);
@@ -218,11 +225,10 @@ export class TaquillaComponent implements OnInit {
       sala: this.selectedHorario.sala.nombre,
       horario: this.selectedHorario.hora,
       seat: [],
-      precios: this.selectedHorario.precios,
+      precios: this.preciosToPrint,
       reImprecion: false
     };
     this.selectedSeats.forEach(seat => printData.seat.push(seat.nombre));
-    console.log(printData);
     this.resetDataToDefaultValues();
     this.ticketsService.printTickets(printData)
     .subscribe((response: any) => {
@@ -235,14 +241,15 @@ export class TaquillaComponent implements OnInit {
   }
 
   private parseDate(date) {
-    let newdate = new Date(date);
-    let dia =  newdate.toLocaleString("es", { weekday: 'long' });
-    let diaNumber =  newdate.toLocaleString("es", { day: "numeric" });
-    let month =  newdate.toLocaleString("es", { month: "long" });
-    let year = newdate.toLocaleString("es", { year: "numeric"});
-    let newDformat =  dia.charAt(0).toUpperCase() + dia.slice(1) + " " + diaNumber + " " +  month.charAt(0).toUpperCase() + month.slice(1) + " " + year;
 
-    return newDformat;
+    let newdate = new Date(date).toISOString();
+    //let dia =  newdate.toLocaleString("es", { weekday: 'long' });
+    //let diaNumber =  newdate.toLocaleString("es", { day: "numeric" });
+    //let month =  newdate.toLocaleString("es", { month: "long" });
+    //let year = newdate.toLocaleString("es", { year: "numeric"});
+    //let newDformat =  dia.charAt(0).toUpperCase() + dia.slice(1) + " " + diaNumber + " " +  month.charAt(0).toUpperCase() + month.slice(1) + " " + year;
+
+    return newdate;
   }
 
   public handleLogOut() {

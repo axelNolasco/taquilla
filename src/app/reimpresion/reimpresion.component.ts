@@ -82,7 +82,8 @@ export class ReimpresionComponent implements OnInit {
       sala: ticketData.sala,
       horario: ticketData.hora,
       seat: [],
-      precios: ticketData.preciosCount
+      precios: ticketData.preciosCount,
+      reImprecion: true
     };
 
     ticketData.asientos.forEach(seat => printData.seat.push(seat.nombre));
@@ -96,7 +97,7 @@ export class ReimpresionComponent implements OnInit {
   }
 
   private parseDate(date) {
-    let newdate = new Date(date);
+    let newdate = new Date(date.replace(/-/g, '\/'));
     let dia =  newdate.toLocaleString("es", { weekday: 'long' });
     let diaNumber =  newdate.toLocaleString("es", { day: "numeric" });
     let month =  newdate.toLocaleString("es", { month: "long" });

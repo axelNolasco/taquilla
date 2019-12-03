@@ -70,8 +70,7 @@ export class ReimpresionComponent implements OnInit {
     });
   }
 
-  public handlePrintButton(ticketData) {
-    console.log(ticketData);
+  public handlePrintButton(ticketData, seat) {    
     let printData: any = {
       user: this.userName,
       pelicula: ticketData.pelicula,
@@ -83,13 +82,11 @@ export class ReimpresionComponent implements OnInit {
       codigo: ticketData.id,
       sala: ticketData.sala,
       horario: ticketData.hora,
-      seat: [],
+      seat: [seat.nombre],
       precios: ticketData.preciosCount,
       reImprecion: true
     };
-
-    ticketData.asientos.forEach(seat => printData.seat.push(seat.nombre));
-    console.log(printData);
+    
     this.ticketsService.printTickets(printData)
     .subscribe((response: any) => {
       console.log(response);

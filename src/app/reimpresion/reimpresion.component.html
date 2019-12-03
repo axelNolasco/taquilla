@@ -25,7 +25,7 @@
   
       </mat-card-content>
     </mat-card>
-    <mat-card *ngIf="showSearchResults" class="search-results">
+    <!--<mat-card *ngIf="showSearchResults" class="search-results">
       <mat-card-content *ngIf="!ticketsFound" class="no-tickets">
         <h2>Ningun ticket encontrado</h2>
       </mat-card-content>
@@ -39,7 +39,7 @@
           </mat-card-content>
         </mat-card>
       </mat-card-content>
-    </mat-card>
+    </mat-card>-->
   </div>
   <br><br>
   <div class="user-tickets-container">
@@ -59,7 +59,7 @@
               <h4>
                 {{seat.nombre}} 
                 <button mat-button  (click)="handleCancelarButton(seat, ticket.asientos.length)">Cancelar</button>
-                <button mat-button (click)="handlePrintButton(ticket)">Imprimir</button>
+                <button mat-button (click)="handlePrintButton(ticket, seat)">Imprimir</button>
               </h4>
             </div>
             

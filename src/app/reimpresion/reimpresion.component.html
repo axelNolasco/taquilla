@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <!--<div class="search-container">
+  <div class="search-container">
     <mat-card>
       <mat-card-title>Ingrese datos de busqueda</mat-card-title>
       <br>
@@ -40,7 +40,7 @@
         </mat-card>
       </mat-card-content>
     </mat-card>
-  </div>-->
+  </div>
   <br><br>
   <div class="user-tickets-container">
     <mat-card>
@@ -55,7 +55,15 @@
             <h3>{{ticket.sala}}</h3>
             <h3>Asientos {{ticket.asientos.length}}</h3>
             <h3>Hora: {{ticket.hora}}</h3>
-            <button mat-button class="print-button" (click)="handlePrintButton(ticket)">Imprimir</button>
+            <div *ngFor="let seat of ticket.asientos">
+              <h4>
+                {{seat.nombre}} 
+                <button mat-button  (click)="handleCancelarButton(seat, ticket.asientos.length)">Cancelar</button>
+                <button mat-button (click)="handlePrintButton(ticket)">Imprimir</button>
+              </h4>
+            </div>
+            
+            
           </mat-card-content>
         </mat-card>
       </mat-card-content>
@@ -63,6 +71,8 @@
     </mat-card>
   </div>
 </mat-card>
+
+
 
 <!-- <div *ngIf="showPrintSection" class="hidden">
   <div id="printJS-form" style="height: 385; width: 200px">

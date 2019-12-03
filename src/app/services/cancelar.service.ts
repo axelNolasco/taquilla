@@ -4,15 +4,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class PagosService {
+export class CancelarService {
   private apiUrl = 'https://taquilla.plazasanjavier.com';
-  //private apiUrl = 'http://taquilla.localhost';
-
+  
   constructor(
     private httpClient: HttpClient
   ) { }
 
-  public payTickets(horarioId, paymentData) {
-    return this.httpClient.post(`${this.apiUrl}/boletos/horario/${horarioId}/pagar`, paymentData);
+  public cancelTicket(boletoAsientoId, delelteAll) {
+    return this.httpClient.delete(`${this.apiUrl}/boletos/cancelar/${boletoAsientoId}/${delelteAll}`);
   }
 }

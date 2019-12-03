@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TicketsService } from '../services/tickets.service';
+import { CancelarService } from '../services/cancelar.service';
 import { Router } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 
@@ -25,6 +26,7 @@ export class ReimpresionComponent implements OnInit {
 
   constructor(
     private ticketsService: TicketsService,
+    private cancelarService: CancelarService,
     private router: Router,
     private oauthService: OAuthService
   ) { }
@@ -96,6 +98,17 @@ export class ReimpresionComponent implements OnInit {
     });
   }
 
+  public handleCancelarButton(seat, seatCount) {
+    let deleteAll = seatCount <= 1 ? 1:0;
+    this.cancelarService.cancelTicket(seat.id_relacion_boleto, deleteAll)
+    .subscribe((response: any) => {
+      console.log(response);
+    }, error => {
+      console.log(error);
+    });
+    this.getCurrentUserTickets();
+  }
+  
   private parseDate(date) {
     let newdate = new Date(date.replace(/-/g, '\/'));
     let dia =  newdate.toLocaleString("es", { weekday: 'long' });

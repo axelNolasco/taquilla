@@ -13,8 +13,7 @@ import { OAuthService } from 'angular-oauth2-oidc';
 export class ReimpresionComponent implements OnInit {
 
   public searchForm: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.email, Validators.required]),
-    date: new FormControl('',Validators.required),
+    codigoBoleto: new FormControl('',Validators.required),
   });
 
   public currentDate: string = new Date().toISOString().split('T')[0];
@@ -55,7 +54,7 @@ export class ReimpresionComponent implements OnInit {
   }
 
   private getTickets() {
-    this.ticketsService.getSalaByEmailAndDate(this.searchForm.value.email, this.searchForm.value.date)
+    this.ticketsService.getByCodigo(this.searchForm.value.codigoBoleto)
     .subscribe((getTicketsResponse: any[]) => {
       console.log('getTicketsResponse', getTicketsResponse);
       this.showSearchResults = true;
@@ -103,8 +102,24 @@ export class ReimpresionComponent implements OnInit {
       this.getCurrentUserTickets();
     }, error => {
       console.log(error);
-    });
-    
+    }); 
+  }
+
+  public handleCancelarButtonCode(seat, seatCount) {
+    let deleteAll = seatCount <= 1 ? 1:0;
+    this.cancelarService.cancelTicket(seat.id_relacion_boleto, deleteAll)
+    .subscribe((response: any) => {
+      console.log(response);
+      this.getTickets();
+    }, error => {
+      console.log(error);
+    }); 
+  }
+
+  public handleResetButton () {    
+    this.ticketsFound = [];
+    this.showSearchResults = false;
+    this.searchForm.reset();
   }
   
   private parseDate(date) {

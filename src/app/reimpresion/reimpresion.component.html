@@ -15,31 +15,36 @@
       <mat-card-content>
         <form [formGroup]="searchForm" (ngSubmit)="handleSearchEvent()">
           <mat-form-field>
-            <input type="text" matInput placeholder="Email" formControlName="email">
-          </mat-form-field>
-          <mat-form-field>
-            <input type="date" matInput [min]="currentDate" placeholder="Date" formControlName="date">
+            <input type="text" matInput placeholder="Codigo Boleto" formControlName="codigoBoleto">
           </mat-form-field>
           <button type="submit" mat-button>Buscar</button>
+          <button mat-button (click)="handleResetButton(); $event.stopPropagation();">Reiniciar</button>
         </form>
-  
       </mat-card-content>
     </mat-card>
-    <!--<mat-card *ngIf="showSearchResults" class="search-results">
+    <mat-card *ngIf="showSearchResults" class="search-results">
       <mat-card-content *ngIf="!ticketsFound" class="no-tickets">
-        <h2>Ningun ticket encontrado</h2>
+        <h2>Ningun boleto encontrado</h2>
       </mat-card-content>
       <mat-card-content *ngIf="ticketsFound" class="tickets-list">
+          <h2>Boleto encontrado</h2>
         <mat-card *ngFor="let ticket of ticketsFound" class="ticket">
-          <mat-card-title>{{ticket.pelicula}}</mat-card-title>
-          <mat-card-content>
-            <h3>{{ticket.sala}}</h3>
-            <h3>Hora: {{ticket.hora}}</h3>
-            <button mat-button class="print-button" (click)="handlePrintButton(ticket)">Imprimir</button>
-          </mat-card-content>
-        </mat-card>
+            <mat-card-title>{{ticket.pelicula}}</mat-card-title>
+            <mat-card-content>
+              <h3>{{ticket.sala}}</h3>
+              <h3>Asientos {{ticket.asientos.length}}</h3>
+              <h3>Hora: {{ticket.hora}}</h3>
+              <div *ngFor="let seat of ticket.asientos">
+                <h4>
+                  {{seat.nombre}} 
+                  <button mat-button (click)="handleCancelarButtonCode(seat, ticket.asientos.length)">Cancelar</button>
+                  <button mat-button (click)="handlePrintButton(ticket, seat)">Imprimir</button>
+                </h4>
+              </div>
+            </mat-card-content>
+          </mat-card>
       </mat-card-content>
-    </mat-card>-->
+    </mat-card>
   </div>
   <br><br>
   <div class="user-tickets-container">

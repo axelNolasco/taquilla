@@ -13,8 +13,8 @@ export class TicketsService {
     private oauthService: OAuthService
   ) { }
 
-  public getSalaByEmailAndDate(email: string, date: string) {
-    return this.httpClient.get(`${this.apiUrl}/boletos/${email}/${date}`);
+  public getByCodigo(codigoBoleto: string) {
+    return this.httpClient.get(`${this.apiUrl}/boletos/code/${codigoBoleto}`);
   }
 
   public getCurrentUserTickets() {

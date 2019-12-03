@@ -103,10 +103,11 @@ export class ReimpresionComponent implements OnInit {
     this.cancelarService.cancelTicket(seat.id_relacion_boleto, deleteAll)
     .subscribe((response: any) => {
       console.log(response);
+      this.getCurrentUserTickets();
     }, error => {
       console.log(error);
     });
-    this.getCurrentUserTickets();
+    
   }
   
   private parseDate(date) {

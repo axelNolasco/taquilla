@@ -199,9 +199,8 @@ export class TaquillaComponent implements OnInit {
     const paymentData: any = {
       type: "taquilla",
       asientos: [],
-      precios: this.preciosToPrint
+      precios: this.selectedPrecios
     };
-    debugger
     this.selectedSeats.forEach(seat => paymentData.asientos.push(seat.id));    
     this.pagosService.payTickets(horarioId, paymentData)
     .subscribe((response: any) => {
@@ -228,7 +227,7 @@ export class TaquillaComponent implements OnInit {
       precios: this.preciosToPrint,
       reImprecion: false
     };
-    debugger
+
     this.selectedSeats.forEach(seat => printData.seat.push(seat.nombre));
     this.resetDataToDefaultValues();
     this.ticketsService.printTickets(printData)

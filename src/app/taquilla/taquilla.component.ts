@@ -91,6 +91,7 @@ export class TaquillaComponent implements OnInit {
     this.seats = [];
     this.selectedSeats = [];
     this.selectedPrecios = [];
+    this.preciosToPrint = [];
   }
 
   public handleHorarioSelection(horario, pelicula) {
@@ -236,6 +237,8 @@ export class TaquillaComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+
+    this.resetDataToDefaultValues();
     // let printButton = document.getElementById('imprimir');
     // printButton.click();
   }

@@ -11,6 +11,7 @@ import { MaterialModule } from "./shared/angular-material.module";
 
 import { TaquillaComponent } from './taquilla/taquilla.component';
 import { ReimpresionComponent } from './reimpresion/reimpresion.component';
+import { CambioComponent } from './cambio/cambio.component';
 import { LoginComponent } from './login/login.component';
 import { CarteleraComponent } from './cartelera/cartelera.component';
 
@@ -27,6 +28,7 @@ import { TokenInterceptor } from './token.interceptor';
     AppComponent,
     TaquillaComponent,
     ReimpresionComponent,
+    CambioComponent,
     LoginComponent,
     CarteleraComponent,
   ],

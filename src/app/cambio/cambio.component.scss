@@ -1,0 +1,312 @@
+.header-container {
+    margin-bottom: 25px;
+  }
+  
+  .reimpresion-label {
+    display: inline-block;
+  }
+  
+  .side-menu {
+    float: right;
+  }
+  
+  .side-menu button {
+    color: #FFFFFF;
+    background-color: #3f51b5;
+    min-width: 150px;
+    margin-left: 10px;
+  }
+  
+  mat-form-field {
+    margin-right: 25px;
+  }
+  
+  input {
+    width: 250px;
+  }
+  
+  .no-tickets {
+    text-align: center;
+  }
+  
+  .search-results {
+    margin-top: 25px;
+  }
+  
+  .tickets-list {
+    text-align: left;
+  }
+  
+  .ticket {
+    display: inline-block;
+    padding: 20px;
+    margin: 10px;
+    min-width: 200px;
+  }
+  
+  .print-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .peliculas-title {
+    display: inline-block;
+  }
+  
+  .mat-form-field {
+    width: 250px;
+  }
+  
+  .complejo {
+    margin-right: 25px;
+  }
+  
+  .pelicula {
+    width: 13%;
+    display: inline-block;
+    margin-right: 1%;
+    margin-bottom: 25px;
+    vertical-align: top;
+    min-height: 300px;
+  }
+  
+  .pelicula mat-card {
+    min-height: 415px;
+    text-align: center;
+  }
+  
+  .pelicula img {
+    width: 200px;
+    min-height: 180px;
+    height: auto;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .horario {
+    border: 1px solid #E0E0E0;
+    width: fit-content;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .horario h5 {
+    display: inline-block;
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .hora {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .sala {
+    background-color: #a6a6a6;
+    color: white;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  
+  .active {
+    background-color: #87d9e5;
+  }
+  
+  .precio-container {
+    width: 200px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10px;
+  }
+  
+  .precio-container div {
+    width: 33%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .precio-container div h4 {
+    margin-top: 0;
+  }
+  
+  .next-button {
+    margin: 0 auto;
+    width: 250px;
+    margin-top: 25px;
+  }
+  
+  .next-button button {
+    background-color: #004998;
+    color: white;
+  }
+  
+  .asientos-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+  
+  .movie-card {
+    width: 19%;
+    vertical-align: top;
+    position: relative;
+    display: inline-block;
+    margin-right: 1%;
+  }
+  
+  .movie-card mat-card {
+    text-align: center;
+  }
+  
+  .movie-card img {
+    width: 100%;
+    min-height: 180px;
+    height: auto;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .asientos {
+    width: 80%;
+    height: auto;
+    background-color: #252C36;
+    text-align: center;
+    vertical-align: top;
+    position: relative;
+    display: inline-block;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-radius: 2px;
+  
+    h2 {
+      color: #FFF;
+      margin-top: 0px;
+    }
+  
+    .room-name {
+      color: #6A7275;
+    }
+  
+    .table-window {
+      overflow: scroll;
+    }
+  
+    .table-window .seats-table-container {
+      width: 94%;
+      height: auto;
+      display: inline-block;
+  
+      table {
+        width: 100%;
+        height: auto;
+        border-collapse: separate;
+        border-spacing: 5px;
+  
+        tr {
+          height: auto;
+  
+          .seat-letter {
+            color: #FFF;
+          }
+  
+          .seat {
+            height: 3rem;
+            font-size: 1rem;
+            background-color: #50C878;
+            border-radius: 5px 5px 0px 0px;
+            color: #FFF;
+            cursor: pointer;
+          }
+  
+          td.active {
+            background-color: #ff9e05;
+          }
+  
+  
+          td.hidden {
+            visibility: hidden;
+          }
+  
+          td.special {
+            // background-image: url('../../assets/imgs/disability-icon.svg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+          }
+  
+          td.disabled {
+            background-color: #373f4b !important;
+          }
+        }
+      }
+    }
+  
+    .screen-section {
+      width: 90%;
+      height: 20px;
+      margin: 0 auto;
+      background-color: #7497B7;
+      border-radius: 2px;
+      padding-top: 4px;
+  
+      p {
+        color: #fff;
+        text-transform: uppercase;
+        margin: 0px;
+      }
+    }
+  }
+  
+  .print-button-container {
+    width: 100%;
+    text-align: center;
+    margin-top: 25px;
+    color: white !important;
+  }
+  
+  .print-button-container button {
+    background-color: #004998;
+    color: white;
+  }
+  
+  .header-container {
+    margin-bottom: 25px;
+  }
+  
+  .welcome-label {
+    display: inline-block;
+  }
+  
+  .side-menu {
+    float: right;
+  }
+  
+  .side-menu button {
+    color: #FFFFFF;
+    background-color: #3f51b5;
+    min-width: 150px;
+    margin-left: 10px;
+  }
+  
+  .user-id {
+    position: absolute;
+    top: 60px;
+  }
+  
+  @media print {
+    #printJS-form { page-break-after: always; }
+  }
+  
+  .button-select-seat {
+    display: inline-block;
+    margin-top: 43px;
+    color: white;
+  }

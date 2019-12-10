@@ -4,6 +4,9 @@
     <h5 class="user-id">{{ userName }}</h5>
     <div class="side-menu">
       <button
+        mat-button
+        routerLink="/cambio"><h3>Cambio de boleto</h3></button>
+      <button
       *ngIf="reimpresionAccess"
       mat-button
       routerLink="/reimpresion"><h3>Reimprimir boletos</h3></button>

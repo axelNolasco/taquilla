@@ -1,0 +1,171 @@
+<mat-card>
+  <div class="header-container">
+    <h1 class="reimpresion-label">Cambio de boletos</h1>
+    <div class="side-menu">
+      <button
+      mat-button
+      routerLink="/taquilla"><h3>Volver</h3></button>
+    </div>
+  </div>
+</mat-card>
+  
+<mat-horizontal-stepper #stepper>
+  <mat-step [stepControl]="0">
+    <mat-card>
+      <mat-card-title> <span (click)="resetDataToDefaultValues()">Ingrese datos de busqueda</span></mat-card-title>
+      <br>
+      <mat-card-content>
+        <form [formGroup]="searchForm" (ngSubmit)="handleSearchEvent()">
+          <mat-form-field>
+            <input type="text" matInput placeholder="Codigo Boleto" formControlName="codigoBoleto">
+          </mat-form-field>
+          <button type="submit" mat-button>Buscar</button>
+          <button mat-button (click)="handleResetButton(); $event.stopPropagation();">Reiniciar</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+    <mat-card *ngIf="showSearchResults" class="search-results">
+      <mat-card-content *ngIf="!ticketsFound" class="no-tickets">
+        <h2>Ningun boleto encontrado</h2>
+      </mat-card-content>
+      <mat-card-content *ngIf="ticketsFound" class="tickets-list">
+          <h2>Boleto encontrado</h2>
+        <mat-card *ngFor="let ticket of ticketsFound" class="ticket">
+            <mat-card-title>{{ticket.pelicula}}</mat-card-title>
+            <mat-card-content>
+              <h3>{{ticket.sala}}</h3>
+              <h3>Asientos {{ticket.asientos.length}}</h3>
+              <h3>Hora: {{ticket.hora}}</h3>
+              <div *ngFor="let seat of ticket.asientos">
+                <h4>
+                  {{seat.nombre}} 
+                  <button mat-button matStepperNext (click)="handleCambioButtonCode(seat, ticket.asientos.length)">cambiar</button>
+                </h4>
+              </div>
+            </mat-card-content>
+          </mat-card>
+      </mat-card-content>
+    </mat-card>
+  </mat-step>
+  <!-- Movie selection -->
+ 
+  <mat-step [stepControl]="1">
+      <mat-form-field>
+        <mat-label>Fechas</mat-label>
+        <mat-select
+          [(ngModel)]="selectedDate"
+          (ngModelChange)="handleDateChange()">
+          <mat-option *ngFor="let fecha of fechas" [value]="fecha">
+            {{fecha | date}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="peliculas-container">
+          <div
+            class="pelicula"
+            *ngFor="let pelicula of peliculas">
+            <mat-card>
+                <img [src]="pelicula.cartelUrl" alt="">
+                <mat-card-title>{{pelicula.nombre}}</mat-card-title>
+                <div class="horarios-container">
+                  <div 
+                    *ngFor="let horario of pelicula.horarios">
+                    <div
+                      class="horario"
+                      (click)="handleHorarioSelection(horario, pelicula)">
+                      <h5
+                        class="hora"
+                        [ngClass]="{'active': horario.id === selectedHorario?.id }">
+                        {{horario.hora}}
+                      </h5>
+                      <h5 class="sala">{{horario.sala.nombre}}</h5>
+                    </div>
+                  </div>
+                </div>
+            </mat-card>
+          </div>
+        </div>
+        <mat-card *ngIf="selectedHorario">
+            <mat-card-title>Boletos: {{totalTickets}} - {{total | currency}}</mat-card-title>
+            <div>
+              <mat-card
+                class="precio-container"
+                *ngFor="let precio of selectedHorario.precios">
+                <div (click)="handleDecreaseButton(precio)">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">remove</mat-icon>
+                </div>
+                <div>
+                  <h4>{{ precio.nombre }}</h4>
+                  <h3>{{precio.boletos}}</h3>
+                  <h5>$ {{ precio.precio }}</h5>
+                </div>
+                <div (click)="handleIncreaseButton(precio)">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
+                </div>
+              </mat-card>
+              <div class="next-button button-select-seat" *ngIf="totalTickets > 0">
+                <button
+                  mat-button
+                  matStepperNext
+                  (click)="handleNextButton()"><h3>Selecccionar asientos</h3></button>
+              </div>
+            </div>
+        </mat-card>
+
+
+  </mat-step>
+  <!-- seat selection -->
+  <mat-step  *ngIf="totalTickets > 0">
+    <ng-template matStepLabel>Cambiar por</ng-template>
+      <div class="asientos-container">
+        <div class="movie-card">
+            <mat-card>
+              <img [src]="selectedMovie.cartelUrl" alt="">
+              <mat-card-title>{{selectedMovie.nombre}}</mat-card-title>
+              <div class="horarios-container">
+                <div
+                  class="horario">
+                  <h5
+                    class="hora">
+                    {{selectedHorario.hora}}
+                  </h5>
+                  <h5 class="sala">{{selectedHorario.sala.nombre}}</h5>
+                </div>
+              </div>
+          </mat-card>
+          <div
+            *ngIf="this.selectedSeats.length >= this.totalTickets"
+            class="print-button-container">
+              <button
+              mat-button
+              matStepperNext
+              (click)="handlePrintButton(); stepper.reset()"><h3>Imprimir asientos</h3></button>
+          </div>
+        </div>
+        <div class="asientos">
+          <h2>{{ totalTickets }} boletos | {{total | currency}}</h2>
+          <div class="table-window">
+            <div class="seats-table-container">
+              <table>
+                <tr *ngFor="let row of seats">
+                  <td class="seat-letter">{{ row.asientos[0].fila }}</td>
+                  <td
+                    *ngFor="let seat of row.asientos"
+                    (click)="handleSeatButton(seat)"
+                    class="seat"
+                    [ngClass]="{'active': seat.active && !seat.ocupado, 'hidden': seat.tipo === 0, 'special': seat.tipo === 2, 'disabled': seat.ocupado }">
+                    {{seat.tipo !== 0 ? seat.numero <= 9 ? '' + seat.fila  +  seat.numero : '' + seat.fila +  seat.numero  : ''}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="screen-section">
+            <p>pantalla</p>
+          </div>
+        </div>
+      </div>
+  </mat-step>
+  <!-- END seat selection --> 
+</mat-horizontal-stepper>
+  

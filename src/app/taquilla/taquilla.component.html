@@ -36,7 +36,7 @@
   </mat-card>
   <mat-horizontal-stepper [linear]="true" #stepper>
     <mat-step [stepControl]="1">
-      <ng-template matStepLabel>Selecciona tu pelicula</ng-template>
+      <ng-template matStepLabel> <span (click)="resetDataToDefaultValues()">Selecciona tu pelicula</span></ng-template>
       <div class="peliculas-container">
         <div
           class="pelicula"

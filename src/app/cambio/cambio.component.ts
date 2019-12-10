@@ -7,7 +7,6 @@ import { TicketsService } from "../services/tickets.service";
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-cambio',
@@ -77,7 +76,7 @@ export class CambioComponent implements OnInit {
   }
 
 
-  private resetDataToDefaultValues() {
+  public resetDataCambio() {
     this.selectedHorario = null;
     this.totalTickets = 0;
     this.total = 0;
@@ -90,7 +89,7 @@ export class CambioComponent implements OnInit {
   }
 
   public handleHorarioSelection(horario, pelicula) {
-    this.resetDataToDefaultValues();
+    this.resetDataCambio();
     this.selectedHorario = horario;
     this.selectedMovie = pelicula;
     this.selectedHorario.precios.map(precio => precio.boletos = 0);
@@ -235,7 +234,7 @@ export class CambioComponent implements OnInit {
   }
   public handleDateChange() {
     console.log(this.selectedDate);
-    this.resetDataToDefaultValues();
+    this.resetDataCambio();
     this.getPeliculas(this.selectedDate);
   }
 
@@ -257,7 +256,7 @@ export class CambioComponent implements OnInit {
     };
 
     this.selectedSeats.forEach(seat => printData.seat.push(seat.nombre));
-    this.resetDataToDefaultValues();
+    this.resetDataCambio();
     this.ticketsService.printTickets(printData)
     .subscribe((response: any) => {
       console.log(response);
@@ -265,7 +264,7 @@ export class CambioComponent implements OnInit {
       console.log(error);
     });
 
-    this.resetDataToDefaultValues();
+    this.resetDataCambio();
     // let printButton = document.getElementById('imprimir');
     // printButton.click();
   }
@@ -303,6 +302,12 @@ export class CambioComponent implements OnInit {
       }
   }, error => {
       console.log('getTicketsResponse error', error);   
-  });
+    });
+  }
+
+  public handleResetButton () {    
+    this.ticketsFound = [];
+    this.showSearchResults = false;
+    this.searchForm.reset();
   }
 }

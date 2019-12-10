@@ -12,7 +12,7 @@
 <mat-horizontal-stepper #stepper>
   <mat-step [stepControl]="0">
     <mat-card>
-      <mat-card-title> <span (click)="resetDataToDefaultValues()">Ingrese datos de busqueda</span></mat-card-title>
+      <mat-card-title> <span (click)="resetDataCambio()">Ingrese datos de busqueda</span></mat-card-title>
       <br>
       <mat-card-content>
         <form [formGroup]="searchForm" (ngSubmit)="handleSearchEvent()">

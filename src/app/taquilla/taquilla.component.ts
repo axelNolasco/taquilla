@@ -83,7 +83,7 @@ export class TaquillaComponent implements OnInit {
     this.getPeliculas(this.selectedDate);
   }
 
-  private resetDataToDefaultValues() {
+  public resetDataToDefaultValues() {
     this.selectedHorario = null;
     this.totalTickets = 0;
     this.total = 0;

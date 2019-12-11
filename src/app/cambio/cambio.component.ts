@@ -107,11 +107,13 @@ export class CambioComponent implements OnInit {
     this.removePrecio(precio.id);
   }
 
-  public handleIncreaseButton(precio) { 
-    this.totalTickets++;
-    precio.boletos++;
-    this.total += Number(precio.precio);
-    this.addPrecio(precio.id);
+  public handleIncreaseButton(precio) {
+    if (this.total < 1) {
+      this.totalTickets++;
+      precio.boletos++;
+      this.total += Number(precio.precio);
+      this.addPrecio(precio.id);
+    }
   }
 
   private addPrecio(id) {

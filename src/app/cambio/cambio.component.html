@@ -50,16 +50,18 @@
   <!-- Movie selection -->
  
   <mat-step [stepControl]="1">
-      <mat-form-field>
-        <mat-label>Fechas</mat-label>
-        <mat-select
-          [(ngModel)]="selectedDate"
-          (ngModelChange)="handleDateChange()">
-          <mat-option *ngFor="let fecha of fechas" [value]="fecha">
-            {{fecha | date}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div class="fechas-container"> 
+        <mat-form-field>
+          <mat-label>Fechas</mat-label>
+          <mat-select
+            [(ngModel)]="selectedDate"
+            (ngModelChange)="handleDateChange()">
+            <mat-option *ngFor="let fecha of fechas" [value]="fecha">
+              {{fecha | date}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
       <div class="peliculas-container">
           <div
             class="pelicula"

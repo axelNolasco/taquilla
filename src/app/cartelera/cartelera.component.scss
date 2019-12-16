@@ -1,9 +1,10 @@
 .peliculas-title {
+    font-size: 1rem;  
     display: inline-block;
   }
   
+  
   .mat-form-field {
-    float: right;
     width: 250px;
   }
   
@@ -11,8 +12,7 @@
     margin-right: 25px;
   }
   
-  .pelicula {
-    width: 13%;
+  .pelicula {    
     display: inline-block;
     margin-right: 1%;
     margin-bottom: 25px;
@@ -90,6 +90,7 @@
   
   .welcome-label {
     display: inline-block;
+    font-size: 1.5rem;
   }
   
   .side-menu {
@@ -105,4 +106,12 @@
   
   .margin-bottom {
       margin-bottom: 30px;
+  }
+
+  .peliculas-container {
+    margin-top: 20px;
+  }
+
+  .prelicula-nombre {
+    font-size: 1rem;
   }

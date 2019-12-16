@@ -1,13 +1,14 @@
 <mat-card>
 
     <div class="header-container">
-        <h1 class="welcome-label">Bienvenido a la Cinema Plaza San Javier</h1>
-        <div class="side-menu">
-            <button mat-button routerLink="/login"><h3>Login</h3></button>
-        </div>
+      <div class="side-menu">
+          <button mat-button routerLink="/login"><h3>Login</h3></button>
+      </div>  
+      <h1 class="welcome-label">Bienvenido a la Cinema Plaza San Javier</h1>
+        
     </div>
 
-    <mat-card class="margin-bottom">
+    <mat-card>
         <h3 class="peliculas-title">Peliculas</h3>
         
         <mat-form-field>
@@ -22,12 +23,13 @@
         </mat-form-field>
     </mat-card>
 
+    <mat-card class="peliculas-container">
         <div
           class="pelicula"
           *ngFor="let pelicula of peliculas">
           <mat-card>
               <img [src]="pelicula.cartelUrl" alt="">
-              <mat-card-title>{{pelicula.nombre}}</mat-card-title>
+              <mat-card-title class="prelicula-nombre">{{pelicula.nombre}}</mat-card-title>
               <div class="horarios-container">
                 <div 
                   *ngFor="let horario of pelicula.horarios">
@@ -45,4 +47,6 @@
               </div>
           </mat-card>
         </div>
+      </mat-card>
+
 </mat-card>

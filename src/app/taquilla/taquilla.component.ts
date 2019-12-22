@@ -6,6 +6,7 @@ import { PagosService } from "../services/pagos.service";
 import { TicketsService } from "../services/tickets.service";
 import { Router } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-taquilla',
@@ -41,7 +42,8 @@ export class TaquillaComponent implements OnInit {
     private pagosService: PagosService,
     private router: Router,
     private oauthService: OAuthService,
-    private ticketsService: TicketsService
+    private ticketsService: TicketsService,
+    public toastr: ToastrManager
   ) { }
 
   ngOnInit() {
@@ -49,7 +51,6 @@ export class TaquillaComponent implements OnInit {
     this.getPeliculas('');
     this.getFechas();
   }
-
   private checkReimpresionAccess() {
     let userData: any = this.oauthService.getIdentityClaims();
     this.reimpresionAccess = userData.permisos.some(access => access.key.includes('reimpresion'));
@@ -206,9 +207,9 @@ export class TaquillaComponent implements OnInit {
     this.selectedSeats.forEach(seat => paymentData.asientos.push(seat.id));    
     this.pagosService.payTickets(horarioId, paymentData)
     .subscribe((response: any) => {
-      
       this.printTickets(response.id);
     }, error => {
+      this.toastr.errorToastr('El boleto ya esta vendido!.', 'Oops!');
       console.log(error);
     })
   }

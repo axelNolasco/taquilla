@@ -22,6 +22,7 @@ import { TicketsService } from "./services/tickets.service";
 
 import { AuthGuard } from './app.guard';
 import { TokenInterceptor } from './token.interceptor';
+import { ToastrModule } from 'ng6-toastr-notifications';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { TokenInterceptor } from './token.interceptor';
     ReimpresionComponent,
     CambioComponent,
     LoginComponent,
-    CarteleraComponent,
+    CarteleraComponent,    
   ],
   imports: [
     BrowserModule,
@@ -38,7 +39,8 @@ import { TokenInterceptor } from './token.interceptor';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    OAuthModule.forRoot()
+    OAuthModule.forRoot(),
+    ToastrModule.forRoot()
   ],
   providers: [
     {

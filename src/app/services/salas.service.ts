@@ -5,7 +5,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SalasService {
-  private apiUrl = ' https://mobile.plazasanjavier.com';
+  //private apiUrl = ' https://mobile.plazasanjavier.com';
+  private apiUrl = 'http://mobile.localhost';
 
   constructor(
     private httpClient: HttpClient

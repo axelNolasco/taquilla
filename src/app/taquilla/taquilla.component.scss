@@ -194,6 +194,10 @@
         td.disabled {
           background-color: #373f4b !important;
         }
+
+        td.apartado {
+          background-color: #384c68;
+        }
       }
     }
   }
@@ -242,7 +246,12 @@
   color: #FFFFFF;
   background-color: #3f51b5;
   min-width: 150px;
-  margin-left: 10px;
+  margin-left: 0px;
+  display: block;
+}
+
+.display-block-btn {
+  display: block;
 }
 
 .user-id {

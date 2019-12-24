@@ -3,18 +3,25 @@
     <h1 class="welcome-label">Bienvenido a la Cinema Plaza San Javier</h1>
     <h5 class="user-id">{{ userName }}</h5>
     <div class="side-menu">
-      <button
-        mat-button
-        routerLink="/cambio"><h3>Cambio de boleto</h3></button>
-      <button
-      *ngIf="reimpresionAccess"
-      mat-button
-      routerLink="/reimpresion"><h3>Reimprimir boletos</h3></button>
-      <button
-      mat-button
-      (click)="handleLogOut()"><h3>Log out</h3></button>
+      <button mat-button [matMenuTriggerFor]="menu" class="setting-btn">Menu</button>
+      <mat-menu #menu="matMenu">
+        <button
+        mat-menu-item
+        routerLink="/cambio" class="display-block-btn">Cambio de boleto</button>
+        <button
+        mat-menu-item
+        routerLink="/reservaciones" class="display-block-btn">Reservaciones</button>
+        <button
+        *ngIf="reimpresionAccess"
+        mat-menu-item
+        routerLink="/reimpresion" class="display-block-btn">Reimprimir boletos</button>
+        <button
+        mat-menu-item
+        (click)="handleLogOut()" class="display-block-btn">Log out</button>
+      </mat-menu>
     </div>
   </div>
+
   <mat-card>
     <h3 class="peliculas-title">Peliculas</h3>
     <mat-form-field>
@@ -130,7 +137,7 @@
                     *ngFor="let seat of row.asientos"
                     (click)="handleSeatButton(seat)"
                     class="seat"
-                    [ngClass]="{'active': seat.active && !seat.ocupado, 'hidden': seat.tipo === 0, 'special': seat.tipo === 2, 'disabled': seat.ocupado }">
+                    [ngClass]="{'active': seat.active && !seat.ocupado, 'hidden': seat.tipo === 0, 'special': seat.tipo === 2, 'disabled': seat.ocupado, 'apartado': seat.apartado && !seat.active }">
                     {{seat.tipo !== 0 ? seat.numero <= 9 ? '' + seat.fila  +  seat.numero : '' + seat.fila +  seat.numero  : ''}}
                   </td>
                 </tr>
@@ -145,28 +152,3 @@
     </mat-step>
   </mat-horizontal-stepper>  
 </mat-card>
-
-<!-- <div *ngIf="showPrintSection" class="hidden">
-  <div id="printJS-form" style="height: 385; width: 200px">
-    <div *ngFor="let asiento of selectedSeats">
-      <img src="/assets/logo.png" width="150px" height="auto" style="display: block; margin: 0 auto;">
-      <h4 style="text-align: center">{{selectedMovie.nombre}}</h4>
-      <p style="text-align: center">Clase {{selectedMovie.clasificacion}} | {{selectedMovie.duracion}}  | {{selectedMovie.idioma}} </p>
-      <p style="background: gray; color: white; text-align: center">{{selectedHorario.sala.nombre}} {{selectedHorario.hora}}
-        <span>{{asiento.nombre}}</span></p>
-      <p style="color: black; text-align: center;">{{selectedDate | date}}</p>
-      <p>Boleto: 1 Codigo 1</p>
-  
-      <hr style="border: 1x dotted black; width: 80%;">
-  
-      <p style="border: 1px solid black; color: black; text-align: center">{{selectedHorario.sala.nombre}} {{selectedHorario.hora}}</p>
-      <p style="color: black; text-align: center;">{{selectedDate | date}}</p>
-      <p>Boleto: 1 Codigo 1</p>
-      <hr style="border: 1x dotted black; width: 80%;">
-    </div>
-  </div>
-
-  <button id="imprimir" type="button" onclick="printJS('printJS-form', 'html')">
-    Print Form
-  </button>
-</div> -->

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { TaquillaComponent } from "../app/taquilla/taquilla.component";
 import { ReimpresionComponent } from "../app/reimpresion/reimpresion.component";
 import { CambioComponent } from "../app/cambio/cambio.component";
+import { ReservacionesComponent } from "../app/reservaciones/reservaciones.component";
 import { LoginComponent } from "../app/login/login.component";
 import { CarteleraComponent } from "../app/cartelera/cartelera.component";
 import { AuthGuard } from './app.guard';
@@ -29,6 +30,11 @@ const routes: Routes = [
   {
     path: 'cambio',
     component: CambioComponent,
+    //canActivate: [AuthGuard]
+  },
+  {
+    path: 'reservaciones',
+    component: ReservacionesComponent,
     //canActivate: [AuthGuard]
   },
   {

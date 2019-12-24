@@ -76,6 +76,7 @@ export class CambioComponent implements OnInit {
   }
 
 
+  // Reset cambio
   public resetDataCambio() {
     this.selectedHorario = null;
     this.totalTickets = 0;

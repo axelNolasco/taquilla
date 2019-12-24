@@ -245,10 +245,10 @@
           td.disabled {
             background-color: #373f4b !important;
           }
-
+          
           td.apartado {
             background-color: #384c68;
-          } 
+          }
         }
       }
     }
@@ -313,4 +313,8 @@
     display: inline-block;
     margin-top: 43px;
     color: white;
+  }
+
+  .mat-header-cell {
+    width: 200px !important;
   }

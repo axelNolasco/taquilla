@@ -1,26 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-
+import { CancelarService } from '../services/cancelar.service';
 import { PeliculasService } from "../services/peliculas.service";
 import { SalasService } from "../services/salas.service";
 import { PagosService } from "../services/pagos.service";
 import { TicketsService } from "../services/tickets.service";
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
-  selector: 'app-taquilla',
-  templateUrl: './taquilla.component.html',
-  styleUrls: ['./taquilla.component.scss']
+  selector: 'app-reservaciones',
+  templateUrl: './reservaciones.component.html',
+  styleUrls: ['./reservaciones.component.scss']
 })
-export class TaquillaComponent implements OnInit {
-  public complejos: Array<any> = [
-    {
-      label: 'Plaza San Javier',
-      value: 'san_javier'
+
+export class ReservacionesComponent implements OnInit {
+    
+    ngOnInit() {
+        this.getFechas();
+        this.getPeliculas('');
+        this.getReservaciones();
+        console.log("cambio de boletos");
     }
-  ];
-  public currentComplejo = this.complejos[0];
+
+    public reservacionForm: FormGroup = new FormGroup({
+        nombreReservacion: new FormControl('',Validators.required),
+    });
+
+     //data for taquilla flow
   public fechas: any;
   public selectedDate: string;
   public peliculas: any;
@@ -35,37 +42,31 @@ export class TaquillaComponent implements OnInit {
   public showPrintSection: boolean = false;
   public userName: string = this.oauthService.getIdentityClaims()['username'];
   public reimpresionAccess: boolean = true;
+  public name: string;
+  
+
+
+  // data for taquilla changue ticket
+  public currentDate: string = new Date().toISOString().split('T')[0];
+  public ticketsFound: any[];
+  public displayedColumns: string[] = ['nombre', 'pelicula', 'hora', 'fecha', 'asientos'];
+  public showSearchResults: boolean = false;
+  public userTickets: any;
+
+
+  //cambio data
+  private seatToChage: any;
+  private seatCount: any;
   
   constructor(
+    private cancelarService: CancelarService,
     private peliculasService: PeliculasService,
     private salasService: SalasService,
     private pagosService: PagosService,
+    private ticketsService: TicketsService,
     private router: Router,
     private oauthService: OAuthService,
-    private ticketsService: TicketsService,
-    public toastr: ToastrManager
   ) { }
-
-  ngOnInit() {
-    this.checkReimpresionAccess();
-    this.getPeliculas('');
-    this.getFechas();
-  }
-  private checkReimpresionAccess() {
-    let userData: any = this.oauthService.getIdentityClaims();
-    this.reimpresionAccess = userData.permisos.some(access => access.key.includes('reimpresion'));
-  }
-
-  private getPeliculas(date) {
-    this.peliculas = [];
-    this.peliculasService.getPeliculas(date)
-    .subscribe(response => {
-      console.log(response);
-      this.peliculas = response;
-    }, error => {
-      console.log(error);
-    });
-  }
 
   private getFechas() {
     this.peliculasService.getFechas()
@@ -78,13 +79,46 @@ export class TaquillaComponent implements OnInit {
     });
   }
 
+
+
   public handleDateChange() {
     console.log(this.selectedDate);
-    this.resetDataToDefaultValues();
+    this.resetDataReservacion();
     this.getPeliculas(this.selectedDate);
   }
+  //Get list of movies
+  private getPeliculas(date) {
+    this.peliculas = [];
+    this.peliculasService.getPeliculas(date)
+    .subscribe(response => {
+      console.log(response);
+      this.peliculas = response;
+    }, error => {
+      console.log(error);
+    });
+  }
 
-  public resetDataToDefaultValues() {
+  //Get Reservaciones
+  private getReservaciones() {
+    this.ticketsService.getReservaciones()
+    .subscribe((getTicketsResponse: any[]) => {
+      console.log('getReservaciones', getTicketsResponse);
+      this.showSearchResults = true;
+      if(getTicketsResponse.length > 0) {
+        this.ticketsFound = getTicketsResponse;
+      } else {
+        this.ticketsFound = null;
+      }
+    }, error => {
+      console.log('getTicketsResponse error', error);
+      
+    });
+}
+
+
+  // Reset cambio
+  public resetDataReservacion() {
+    debugger
     this.selectedHorario = null;
     this.totalTickets = 0;
     this.total = 0;
@@ -93,14 +127,17 @@ export class TaquillaComponent implements OnInit {
     this.selectedSeats = [];
     this.selectedPrecios = [];
     this.preciosToPrint = [];
+    this.name = "";
+    this.reservacionForm.reset();
     console.log('Reset values');
   }
 
   public handleHorarioSelection(horario, pelicula) {
-    this.resetDataToDefaultValues();
+    this.resetDataReservacion();
     this.selectedHorario = horario;
     this.selectedMovie = pelicula;
     this.selectedHorario.precios.map(precio => precio.boletos = 0);
+    console.log("selected time");
   }
 
   public handleDecreaseButton(precio) {
@@ -114,11 +151,11 @@ export class TaquillaComponent implements OnInit {
     this.removePrecio(precio.id);
   }
 
-  public handleIncreaseButton(precio) { 
-    this.totalTickets++;
-    precio.boletos++;
-    this.total += Number(precio.precio);
-    this.addPrecio(precio.id);
+  public handleIncreaseButton(precio) {
+      this.totalTickets++;
+      precio.boletos++;
+      this.total += Number(precio.precio);
+      this.addPrecio(precio.id);
   }
 
   private addPrecio(id) {
@@ -149,7 +186,11 @@ export class TaquillaComponent implements OnInit {
   }
 
   public handleNextButton() {
-    this.getRoomData();
+    if (this.reservacionForm.valid) {
+        console.log('Event correct with name');
+        this.name = this.reservacionForm.value.nombreReservacion;
+        this.getRoomData();
+      }
   }
 
   private getRoomData() {
@@ -158,14 +199,12 @@ export class TaquillaComponent implements OnInit {
     .subscribe(response => {
       
       this.seats = response['distribucion'];
-      console.log(this.seats);
     }, error => {
       console.log(error);
     });
   }
 
   public handleSeatButton(seat) {
-    
     if (seat.tipo == 0  || seat.ocupado === true) {
       return;
     }
@@ -177,7 +216,6 @@ export class TaquillaComponent implements OnInit {
       console.log('limite alcanzado'); 
       return;
     } else {
-      debugger
       seat.active = true;
       this.addSeat(seat);
     }
@@ -195,75 +233,26 @@ export class TaquillaComponent implements OnInit {
     });
   }
 
-  public handlePrintButton() {
-    console.log("printing...", this.selectedSeats);
-    this.payTickets();
+  public handleReservarButon() {
+      console.log("Reservar");
+      this.reservarTickets();
   }
 
-  private payTickets() {    
+  private reservarTickets() {    
     const horarioId = this.selectedHorario.id;
     const paymentData: any = {
       type: "taquilla",
+      nombre: this.name,
       asientos: [],
       precios: this.selectedPrecios
     };
     this.selectedSeats.forEach(seat => paymentData.asientos.push(seat.id));    
-    this.pagosService.payTickets(horarioId, paymentData)
+    this.ticketsService.reservarTickets(horarioId, paymentData)
     .subscribe((response: any) => {
-      this.printTickets(response.id);
+      this.resetDataReservacion();
+      console.log("Reservacion echa!");      
     }, error => {
-      this.toastr.errorToastr('El boleto ya esta vendido!.', 'Oops!');
-      this.getRoomData();
       console.log(error);
     })
-  }
-
-  private printTickets(id) {
-    let printData: any = {
-      user: this.userName,
-      pelicula: this.selectedMovie.nombre,
-      clasificacion: this.selectedMovie.clasificacion,
-      duracion: this.selectedMovie.duracion,
-      idioma: this.selectedMovie.idioma,
-      fecha: this.parseDate(this.selectedDate),
-      boleto: id,
-      codigo: id,
-      sala: this.selectedHorario.sala.nombre,
-      horario: this.selectedHorario.hora,
-      seat: [],
-      precios: this.preciosToPrint,
-      reImprecion: false
-    };
-
-    this.selectedSeats.forEach(seat => printData.seat.push(seat.nombre));
-    this.resetDataToDefaultValues();
-    this.ticketsService.printTickets(printData)
-    .subscribe((response: any) => {
-      console.log(response);
-    }, error => {
-      console.log(error);
-    });
-
-    this.resetDataToDefaultValues();
-    // let printButton = document.getElementById('imprimir');
-    // printButton.click();
-  }
-
-  private parseDate(date) {
-
-    let newdate = new Date(date).toISOString();
-    //let dia =  newdate.toLocaleString("es", { weekday: 'long' });
-    //let diaNumber =  newdate.toLocaleString("es", { day: "numeric" });
-    //let month =  newdate.toLocaleString("es", { month: "long" });
-    //let year = newdate.toLocaleString("es", { year: "numeric"});
-    //let newDformat =  dia.charAt(0).toUpperCase() + dia.slice(1) + " " + diaNumber + " " +  month.charAt(0).toUpperCase() + month.slice(1) + " " + year;
-
-    return newdate;
-  }
-
-  public handleLogOut() {
-    console.log('Log out event');
-    this.oauthService.logOut();
-    this.router.navigate(['/']);
   }
 }

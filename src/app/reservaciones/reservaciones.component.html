@@ -170,6 +170,12 @@
       </ng-container>
 
       <!-- fecha Column -->
+      <ng-container matColumnDef="customColumn">
+        <th mat-header-cell *matHeaderCellDef> NO. asientos </th>
+        <td mat-cell *matCellDef="let reservacion"> {{reservacion.asientos.length}} </td>
+      </ng-container> 
+
+      <!-- Asientos Column -->
       <ng-container matColumnDef="asientos">
         <th mat-header-cell *matHeaderCellDef> Asientos </th>
         <td mat-cell *matCellDef="let reservacion">
@@ -178,6 +184,16 @@
           </span>
         </td>
       </ng-container>
+
+      <!--Actions column-->
+      <ng-container matColumnDef="actionColunm">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let reservacion"> 
+         <button mat-buton (click)="cancelarReservacion(reservacion.id)">
+           X
+         </button>  
+        </td>
+      </ng-container> 
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

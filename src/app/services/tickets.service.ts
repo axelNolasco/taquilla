@@ -35,4 +35,8 @@ export class TicketsService {
   public getReservaciones() {
     return this.httpClient.get(`${this.apiUrl}/apartados`);
   }
+
+  public cancelResevacion(id){
+    return this.httpClient.delete(`${this.apiUrl}/apartados/cancelar/${id}`);    
+  }
 }

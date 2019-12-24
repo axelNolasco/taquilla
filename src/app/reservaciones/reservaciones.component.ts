@@ -49,7 +49,7 @@ export class ReservacionesComponent implements OnInit {
   // data for taquilla changue ticket
   public currentDate: string = new Date().toISOString().split('T')[0];
   public ticketsFound: any[];
-  public displayedColumns: string[] = ['nombre', 'pelicula', 'hora', 'fecha', 'asientos'];
+  public displayedColumns: string[] = ['nombre', 'pelicula', 'hora', 'fecha', 'customColumn', 'asientos', 'actionColunm'];
   public showSearchResults: boolean = false;
   public userTickets: any;
 
@@ -249,7 +249,18 @@ export class ReservacionesComponent implements OnInit {
     this.ticketsService.reservarTickets(horarioId, paymentData)
     .subscribe((response: any) => {
       this.resetDataReservacion();
+      this.getReservaciones();
       console.log("Reservacion echa!");      
+    }, error => {
+      console.log(error);
+    })
+  }
+
+  public cancelarReservacion(id) {
+    this.ticketsService.cancelResevacion(id)
+    .subscribe((response: any) => {
+      console.log("Reservacion cancelada!");
+      this.getReservaciones();
     }, error => {
       console.log(error);
     })

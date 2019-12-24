@@ -248,8 +248,7 @@ export class ReservacionesComponent implements OnInit {
     this.selectedSeats.forEach(seat => paymentData.asientos.push(seat.id));    
     this.ticketsService.reservarTickets(horarioId, paymentData)
     .subscribe((response: any) => {
-      this.resetDataReservacion();
-      this.getReservaciones();
+      this.router.navigate(['/taquilla']);
       console.log("Reservacion echa!");      
     }, error => {
       console.log(error);

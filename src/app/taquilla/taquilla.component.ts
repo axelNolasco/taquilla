@@ -35,6 +35,7 @@ export class TaquillaComponent implements OnInit {
   public showPrintSection: boolean = false;
   public userName: string = this.oauthService.getIdentityClaims()['username'];
   public reimpresionAccess: boolean = true;
+  public filteredPeliculas: any;
   
   constructor(
     private peliculasService: PeliculasService,
@@ -56,12 +57,24 @@ export class TaquillaComponent implements OnInit {
     this.reimpresionAccess = userData.permisos.some(access => access.key.includes('reimpresion'));
   }
 
+  private filterByDates() {
+    let  currentDate = new Date();
+    this.filteredPeliculas = this.peliculas.filter(function (element) {
+      if (currentDate > element.horarios[0].hora) {
+        return element;
+      }
+    })
+
+    
+  }
+
   private getPeliculas(date) {
     this.peliculas = [];
     this.peliculasService.getPeliculas(date)
     .subscribe(response => {
       console.log(response);
       this.peliculas = response;
+      this.filterByDates();
     }, error => {
       console.log(error);
     });
@@ -177,7 +190,7 @@ export class TaquillaComponent implements OnInit {
       console.log('limite alcanzado'); 
       return;
     } else {
-      debugger
+      
       seat.active = true;
       this.addSeat(seat);
     }

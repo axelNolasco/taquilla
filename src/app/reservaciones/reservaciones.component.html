@@ -51,7 +51,7 @@
           </div>
                     
           <mat-card *ngIf="selectedHorario">
-            <form [formGroup]="reservacionForm" (ngSubmit)="handleSearchEvent()">
+            <form [formGroup]="reservacionForm">
                 <mat-form-field>
                   <input type="text" matInput placeholder="Nombre Reservacion" formControlName="nombreReservacion">
                 </mat-form-field>

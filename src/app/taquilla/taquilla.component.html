@@ -1,9 +1,31 @@
 <mat-card>
   <div class="header-container">
-    <h1 class="welcome-label">Bienvenido a la Cinema Plaza San Javier</h1>
-    <h5 class="user-id">{{ userName }}</h5>
-    <div class="side-menu">
-      <button mat-button [matMenuTriggerFor]="menu" class="setting-btn">Menu</button>
+    <!--<h1 class="welcome-label">Bienvenido a la Cinema Plaza San Javier</h1>
+    <h5 class="user-id">{{ userName }}</h5>-->
+  </div>
+
+  <mat-card>
+      <mat-form-field>
+        <mat-label>Fechas</mat-label>
+        <mat-select
+          [(ngModel)]="selectedDate"
+          (ngModelChange)="handleDateChange()">
+          <mat-option *ngFor="let fecha of fechas" [value]="fecha">
+            {{fecha | date}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="complejo">
+        <mat-label>Complejo</mat-label>
+        <mat-select
+          [(value)]="currentComplejo.value">
+          <mat-option *ngFor="let complejo of complejos" [value]="complejo.value">
+            {{complejo.label}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> 
+
+      <button mat-button [matMenuTriggerFor]="menu" class="setting-btn complejo">Menu</button>
       <mat-menu #menu="matMenu">
         <button
         mat-menu-item
@@ -19,31 +41,13 @@
         mat-menu-item
         (click)="handleLogOut()" class="display-block-btn">Log out</button>
       </mat-menu>
-    </div>
-  </div>
-
-  <mat-card>
-    <h3 class="peliculas-title">Peliculas</h3>
-    <mat-form-field>
-      <mat-label>Fechas</mat-label>
-      <mat-select
-        [(ngModel)]="selectedDate"
-        (ngModelChange)="handleDateChange()">
-        <mat-option *ngFor="let fecha of fechas" [value]="fecha">
-          {{fecha | date}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="complejo">
-      <mat-label>Complejo</mat-label>
-      <mat-select
-        [(value)]="currentComplejo.value">
-        <mat-option *ngFor="let complejo of complejos" [value]="complejo.value">
-          {{complejo.label}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
   </mat-card>
+
+
+
+
+
+  
   <mat-horizontal-stepper [linear]="true" #stepper>
     <mat-step [stepControl]="1">
       <ng-template matStepLabel> <span (click)="resetDataToDefaultValues()">Selecciona tu pelicula</span></ng-template>

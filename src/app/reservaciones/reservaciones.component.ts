@@ -118,7 +118,6 @@ export class ReservacionesComponent implements OnInit {
 
   // Reset cambio
   public resetDataReservacion() {
-    debugger
     this.selectedHorario = null;
     this.totalTickets = 0;
     this.total = 0;

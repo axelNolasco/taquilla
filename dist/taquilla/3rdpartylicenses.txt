@@ -101,11 +101,15 @@ THE SOFTWARE.
 
 @angular/material/icon
 
+@angular/material/menu
+
 @angular/material/select
 
 @angular/material/snack-bar
 
 @angular/material/stepper
+
+@angular/material/table
 
 @angular/material/tooltip
 
@@ -168,6 +172,8 @@ THE SOFTWARE.
 
 jsrsasign
 MIT
+
+ng6-toastr-notifications
 
 rxjs
 Apache-2.0

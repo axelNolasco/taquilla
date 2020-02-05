@@ -27,10 +27,8 @@ export class ReporteComponent implements OnInit {
 
     private getReporte() {        
         this.reporteService.getReport(this.currentDate, "Taquilla")   
-        .subscribe((response: any) => {
-            console.log('Get Report  success', response);
+        .subscribe((response: any) => {            
             this.reportData = this.parseResponse(response);
-            console.log(this.reportData);
           }, error => {
             console.log('Get report Fail', error);      
           });

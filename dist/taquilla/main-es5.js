@@ -1134,9 +1134,7 @@ var ReporteComponent = /** @class */ (function () {
         var _this = this;
         this.reporteService.getReport(this.currentDate, "Taquilla")
             .subscribe(function (response) {
-            console.log('Get Report  success', response);
             _this.reportData = _this.parseResponse(response);
-            console.log(_this.reportData);
         }, function (error) {
             console.log('Get report Fail', error);
         });

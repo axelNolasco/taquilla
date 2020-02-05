@@ -1107,9 +1107,7 @@ let ReporteComponent = class ReporteComponent {
     getReporte() {
         this.reporteService.getReport(this.currentDate, "Taquilla")
             .subscribe((response) => {
-            console.log('Get Report  success', response);
             this.reportData = this.parseResponse(response);
-            console.log(this.reportData);
         }, error => {
             console.log('Get report Fail', error);
         });

@@ -15,6 +15,7 @@ import { CambioComponent } from './cambio/cambio.component';
 import { ReservacionesComponent } from './reservaciones/reservaciones.component';
 import { LoginComponent } from './login/login.component';
 import { CarteleraComponent } from './cartelera/cartelera.component';
+import { ReporteComponent } from './reporte/reporte.component';
 
 import { PeliculasService } from "./services/peliculas.service";
 import { SalasService } from "./services/salas.service";
@@ -31,9 +32,10 @@ import { ToastrModule } from 'ng6-toastr-notifications';
     TaquillaComponent,
     ReimpresionComponent,
     CambioComponent,
+    ReporteComponent,
     ReservacionesComponent,
     LoginComponent,
-    CarteleraComponent,    
+    CarteleraComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,61 @@
+<mat-card>
+  <div class="header-container">
+    <h1 class="reimpresion-label">Reporte {{currentDate}}</h1>
+    <div class="side-menu">
+      <button
+      mat-button
+      routerLink="/taquilla"><h3>Volver</h3></button>
+    </div>
+  </div>
+</mat-card>
+<mat-card>
+<table>
+      <thead>
+        <th>Pelicula</th>
+        <th>Distribuidora</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Sala</th>
+        <th>Tipo</th>
+        <th>Precio</th>
+        <th>Entradas</th>
+        <th>Total</th>
+      </thead> 
+    <ng-container *ngFor="let rd of reportData; let funcIndex = index;"> 
+      <tbody>
+        <ng-container  *ngIf="funcIndex!=(reportData.length-1)">
+            <tr class="nombre-pelicula">
+              <td [attr.rowspan]="rd.funciones.length">{{rd.nombre}}</td>
+            </tr>
+          <ng-container>
+              <ng-container *ngFor="let func of rd.funciones; let i= index;">
+                <tr class="func-info" *ngIf="i!=rd.funciones.length-1">
+                    <td>{{func.nombre_distribuidora}}</td>
+                    <td>{{func.fecha}}</td>
+                    <td>{{func.hora}}</td>
+                    <td>{{func.sala}}</td>
+                    <td>{{func.tipo}}</td>
+                    <td>{{func.precio | currency}}</td>
+                    <td>{{func.entradas}}</td>
+                    <td>{{func.total}}</td>
+                </tr>
+                <tr class="func-info totales-funcion" *ngIf="i==rd.funciones.length-1">
+                  <td [attr.colspan]="7"></td>
+                  <td>{{func.entradas}}</td>
+                  <td>{{func.total | currency}}</td> 
+                </tr>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+        <!-- report -->
+        <ng-container *ngIf="funcIndex==(reportData.length-1)">
+          <tr class="totales">
+            <td [attr.colspan]="7">{{rd.nombre}}</td>
+            <td>{{rd.entradas}}</td>
+            <td>{{rd.total | currency}}</td> 
+        </tr>
+      </ng-container>
+    </tbody>  
+    </ng-container>
+</table>
+</mat-card>

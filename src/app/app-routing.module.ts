@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { TaquillaComponent } from "../app/taquilla/taquilla.component";
 import { ReimpresionComponent } from "../app/reimpresion/reimpresion.component";
 import { CambioComponent } from "../app/cambio/cambio.component";
+import { ReporteComponent } from "../app/reporte/reporte.component";
 import { ReservacionesComponent } from "../app/reservaciones/reservaciones.component";
 import { LoginComponent } from "../app/login/login.component";
 import { CarteleraComponent } from "../app/cartelera/cartelera.component";
@@ -30,6 +31,11 @@ const routes: Routes = [
   {
     path: 'cambio',
     component: CambioComponent,
+    //canActivate: [AuthGuard]
+  },
+  {
+    path: 'reporte',
+    component: ReporteComponent,
     //canActivate: [AuthGuard]
   },
   {

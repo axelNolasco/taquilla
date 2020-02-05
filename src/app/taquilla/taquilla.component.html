@@ -39,15 +39,13 @@
         routerLink="/reimpresion" class="display-block-btn">Reimprimir boletos</button>
         <button
         mat-menu-item
+        routerLink="/reporte" class="display-block-btn">Reporte</button>
+        <button
+        mat-menu-item
         (click)="handleLogOut()" class="display-block-btn">Log out</button>
       </mat-menu>
   </mat-card>
 
-
-
-
-
-  
   <mat-horizontal-stepper [linear]="true" #stepper>
     <mat-step [stepControl]="1">
       <ng-template matStepLabel> <span (click)="resetDataToDefaultValues()">Selecciona tu pelicula</span></ng-template>

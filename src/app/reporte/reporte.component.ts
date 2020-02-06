@@ -15,7 +15,7 @@ export class ReporteComponent implements OnInit {
     
 
     ngOnInit() {
-        this.currentDate = new Date().toISOString().substring(0, 10);;
+        this.currentDate = this.formatDate(Date());
         this.getReporte();
     }
 
@@ -25,6 +25,20 @@ export class ReporteComponent implements OnInit {
         private oauthService: OAuthService
     ) { }
 
+    private formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+    
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+    
+        return [year, month, day].join('-');
+    }
+    
     private getReporte() {        
         this.reporteService.getReport(this.currentDate, "Taquilla")   
         .subscribe((response: any) => {            

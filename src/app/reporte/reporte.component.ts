@@ -38,7 +38,7 @@ export class ReporteComponent implements OnInit {
     
         return [year, month, day].join('-');
     }
-    
+
     private getReporte() {        
         this.reporteService.getReport(this.currentDate, "Taquilla")   
         .subscribe((response: any) => {            
@@ -61,5 +61,21 @@ export class ReporteComponent implements OnInit {
            total = 0;
        })
        return response;
+    }
+
+    private updateReport(event) {
+        var d = event.value,
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+
+        let selectedDate = [year, month, day].join('-');
+        this.currentDate = selectedDate;
+        this.getReporte();
     }
 }

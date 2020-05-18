@@ -189,10 +189,10 @@ export class CambioComponent implements OnInit {
   }
 
   public handlePrintButton() {
-    this.cancelarBoleto();
+    //this.cancelarBoleto();
   }
 
-  private cancelarBoleto() {
+  /*private cancelarBoleto() {
     let deleteAll = this.seatCount <= 1 ? 1:0;
     this.cancelarService.cancelTicket(this.seatToChage.id_relacion_boleto, deleteAll)
     .subscribe((response: any) => {
@@ -201,7 +201,7 @@ export class CambioComponent implements OnInit {
       console.log(error);
       return false;
     }); 
-  }
+  }*/
 
   
   public handleCambioButtonCode(seat, seatCount) {

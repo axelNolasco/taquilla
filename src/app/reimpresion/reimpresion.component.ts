@@ -1,9 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TicketsService } from '../services/tickets.service';
 import { CancelarService } from '../services/cancelar.service';
 import { Router } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ToastrManager } from 'ng6-toastr-notifications';
+
+export interface DialogData {
+  user:     string;
+  password: string;
+  motivo:   string;
+}
 
 @Component({
   selector: 'app-reimpresion',
@@ -11,6 +19,10 @@ import { OAuthService } from 'angular-oauth2-oidc';
   styleUrls: ['./reimpresion.component.scss']
 })
 export class ReimpresionComponent implements OnInit {
+
+  user:     string;
+  password: string;
+  motivo:   string;
 
   public searchForm: FormGroup = new FormGroup({
     codigoBoleto: new FormControl('',Validators.required),
@@ -27,7 +39,9 @@ export class ReimpresionComponent implements OnInit {
     private ticketsService: TicketsService,
     private cancelarService: CancelarService,
     private router: Router,
-    private oauthService: OAuthService
+    private oauthService: OAuthService,
+    public dialog: MatDialog,
+    public toastr: ToastrManager
   ) { }
 
   ngOnInit() {
@@ -94,20 +108,20 @@ export class ReimpresionComponent implements OnInit {
     });
   }
 
-  public handleCancelarButton(seat, seatCount) {
+  public handleCancelarButton(seat, seatCount, user, password, motivo) {
     let deleteAll = seatCount <= 1 ? 1:0;
-    this.cancelarService.cancelTicket(seat.id_relacion_boleto, deleteAll)
+    this.cancelarService.cancelTicket(seat.id_relacion_boleto, deleteAll, user, password, motivo)
     .subscribe((response: any) => {
-      console.log(response);
+      this.toastr.successToastr('Boleto cancelado!');
       this.getCurrentUserTickets();
     }, error => {
-      console.log(error);
+      this.toastr.errorToastr(error.error.message);
     }); 
   }
 
-  public handleCancelarButtonCode(seat, seatCount) {
+  public handleCancelarButtonCode(seat, seatCount, user, password, motivo) {
     let deleteAll = seatCount <= 1 ? 1:0;
-    this.cancelarService.cancelTicket(seat.id_relacion_boleto, deleteAll)
+    this.cancelarService.cancelTicket(seat.id_relacion_boleto, deleteAll, user, password, motivo)
     .subscribe((response: any) => {
       console.log(response);
       this.getTickets();
@@ -131,5 +145,40 @@ export class ReimpresionComponent implements OnInit {
     let newDformat =  dia.charAt(0).toUpperCase() + dia.slice(1) + " " + diaNumber + " " +  month.charAt(0).toUpperCase() + month.slice(1) + " " + year;
 
     return newDformat;
+  }
+
+  openDialog(seat, seatCount): void {
+    const dialogRef = this.dialog.open(CancelacionModal, {
+      width: '250px',
+      data: {
+        user:      this.user,
+        password:  this.password,
+        motivo:    this.motivo,
+        seat:      seat,
+        seatCount: seatCount
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.handleCancelarButton(result.seat, result.seatCount, result.user, result.password, result.motivo);
+      console.log(result);
+    });
+  }
+}
+
+@Component({
+  selector: 'cancelacion-modal',
+  templateUrl: 'cancelacion-modal.html',
+})
+
+export class CancelacionModal {
+
+  constructor(
+    public dialogRef: MatDialogRef<CancelacionModal>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

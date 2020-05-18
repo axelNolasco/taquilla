@@ -11,6 +11,7 @@ import { MaterialModule } from "./shared/angular-material.module";
 
 import { TaquillaComponent } from './taquilla/taquilla.component';
 import { ReimpresionComponent } from './reimpresion/reimpresion.component';
+import { CancelacionModal } from './reimpresion/reimpresion.component';
 import { CambioComponent } from './cambio/cambio.component';
 import { ReservacionesComponent } from './reservaciones/reservaciones.component';
 import { LoginComponent } from './login/login.component';
@@ -36,6 +37,10 @@ import { ToastrModule } from 'ng6-toastr-notifications';
     ReservacionesComponent,
     LoginComponent,
     CarteleraComponent,
+    CancelacionModal,
+  ],
+  entryComponents: [
+    CancelacionModal,
   ],
   imports: [
     BrowserModule,

@@ -67,6 +67,17 @@ module.exports = "<mat-card>\r\n  <mat-card-title>Taquilla Plaza San Javier</mat
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/index.js!./src/app/reimpresion/cancelacion-modal.html":
+/*!******************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/reimpresion/cancelacion-modal.html ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h1 mat-dialog-title>Cancelacion </h1>\r\n<div mat-dialog-content>\r\n  <mat-form-field>\r\n    <mat-label>Usuario</mat-label>\r\n    <input matInput [(ngModel)]=\"data.user\">\r\n  </mat-form-field>\r\n  <mat-form-field>\r\n    <mat-label>Password</mat-label>\r\n    <input type=\"password\" matInput [(ngModel)]=\"data.password\">\r\n  </mat-form-field>\r\n  <mat-form-field>\r\n    <mat-label>Motivo</mat-label>\r\n    <input matInput [(ngModel)]=\"data.motivo\">\r\n  </mat-form-field>\r\n</div>\r\n<div mat-dialog-actions>\r\n  <button mat-button (click)=\"onNoClick()\">Cerrar</button>\r\n  <button mat-button [mat-dialog-close]=\"data\" cdkFocusInitial>Cancelar</button>\r\n</div>"
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/index.js!./src/app/reimpresion/reimpresion.component.html":
 /*!**********************************************************************************!*\
   !*** ./node_modules/raw-loader!./src/app/reimpresion/reimpresion.component.html ***!
@@ -74,7 +85,7 @@ module.exports = "<mat-card>\r\n  <mat-card-title>Taquilla Plaza San Javier</mat
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card>\r\n  <div class=\"header-container\">\r\n    <h1 class=\"reimpresion-label\">Reimprimir boletos</h1>\r\n    <div class=\"side-menu\">\r\n      <button\r\n      mat-button\r\n      routerLink=\"/taquilla\"><h3>Volver</h3></button>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"search-container\">\r\n    <mat-card>\r\n      <mat-card-title>Ingrese datos de busqueda</mat-card-title>\r\n      <br>\r\n      <mat-card-content>\r\n        <form [formGroup]=\"searchForm\" (ngSubmit)=\"handleSearchEvent()\">\r\n          <mat-form-field>\r\n            <input type=\"text\" matInput placeholder=\"Codigo Boleto\" formControlName=\"codigoBoleto\">\r\n          </mat-form-field>\r\n          <button type=\"submit\" mat-button>Buscar</button>\r\n          <button mat-button (click)=\"handleResetButton(); $event.stopPropagation();\">Reiniciar</button>\r\n        </form>\r\n      </mat-card-content>\r\n    </mat-card>\r\n    <mat-card *ngIf=\"showSearchResults\" class=\"search-results\">\r\n      <mat-card-content *ngIf=\"!ticketsFound\" class=\"no-tickets\">\r\n        <h2>Ningun boleto encontrado</h2>\r\n      </mat-card-content>\r\n      <mat-card-content *ngIf=\"ticketsFound\" class=\"tickets-list\">\r\n          <h2>Boleto encontrado</h2>\r\n        <mat-card *ngFor=\"let ticket of ticketsFound\" class=\"ticket\">\r\n            <mat-card-title>{{ticket.pelicula}}</mat-card-title>\r\n            <mat-card-content>\r\n              <h3>{{ticket.sala}}</h3>\r\n              <h3>Asientos {{ticket.asientos.length}}</h3>\r\n              <h3>Hora: {{ticket.hora}}</h3>\r\n              <div *ngFor=\"let seat of ticket.asientos\">\r\n                <h4>\r\n                  {{seat.nombre}} \r\n                  <button mat-button (click)=\"handleCancelarButtonCode(seat, ticket.asientos.length)\">Cancelar</button>\r\n                  <button mat-button (click)=\"handlePrintButton(ticket, seat)\">Imprimir</button>\r\n                </h4>\r\n              </div>\r\n            </mat-card-content>\r\n          </mat-card>\r\n      </mat-card-content>\r\n    </mat-card>\r\n  </div>\r\n  <br><br>\r\n  <div class=\"user-tickets-container\">\r\n    <mat-card>\r\n      <mat-card-title>Seleccione ticket por venta</mat-card-title>\r\n      <mat-card-content *ngIf=\"!userTickets\" class=\"no-tickets\">\r\n        <h2>Ningun ticket encontrado</h2>\r\n      </mat-card-content>\r\n      <mat-card-content *ngIf=\"userTickets\" class=\"tickets-list\">\r\n        <mat-card *ngFor=\"let ticket of userTickets\" class=\"ticket\">\r\n          <mat-card-title>{{ticket.pelicula}}</mat-card-title>\r\n          <mat-card-content>\r\n            <h3>{{ticket.sala}}</h3>\r\n            <h3>Asientos {{ticket.asientos.length}}</h3>\r\n            <h3>Hora: {{ticket.hora}}</h3>\r\n            <div *ngFor=\"let seat of ticket.asientos\">\r\n              <h4>\r\n                {{seat.nombre}} \r\n                <button mat-button  (click)=\"handleCancelarButton(seat, ticket.asientos.length)\">Cancelar</button>\r\n                <button mat-button (click)=\"handlePrintButton(ticket, seat)\">Imprimir</button>\r\n              </h4>\r\n            </div>\r\n          </mat-card-content>\r\n        </mat-card>\r\n      </mat-card-content>\r\n      <br>\r\n    </mat-card>\r\n  </div>\r\n</mat-card>"
+module.exports = "<mat-card>\r\n  <div class=\"header-container\">\r\n    <h1 class=\"reimpresion-label\">Reimprimir boletos</h1>\r\n    <div class=\"side-menu\">\r\n      <button\r\n      mat-button\r\n      routerLink=\"/taquilla\"><h3>Volver</h3></button>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"search-container\">\r\n    <mat-card>\r\n      <mat-card-title>Ingrese datos de busqueda</mat-card-title>\r\n      <br>\r\n      <mat-card-content>\r\n        <form [formGroup]=\"searchForm\" (ngSubmit)=\"handleSearchEvent()\">\r\n          <mat-form-field>\r\n            <input type=\"text\" matInput placeholder=\"Codigo Boleto\" formControlName=\"codigoBoleto\">\r\n          </mat-form-field>\r\n          <button type=\"submit\" mat-button>Buscar</button>\r\n          <button mat-button (click)=\"handleResetButton(); $event.stopPropagation();\">Reiniciar</button>\r\n        </form>\r\n      </mat-card-content>\r\n    </mat-card>\r\n    <mat-card *ngIf=\"showSearchResults\" class=\"search-results\">\r\n      <mat-card-content *ngIf=\"!ticketsFound\" class=\"no-tickets\">\r\n        <h2>Ningun boleto encontrado</h2>\r\n      </mat-card-content>\r\n      <mat-card-content *ngIf=\"ticketsFound\" class=\"tickets-list\">\r\n          <h2>Boleto encontrado</h2>\r\n        <mat-card *ngFor=\"let ticket of ticketsFound\" class=\"ticket\">\r\n            <mat-card-title>{{ticket.pelicula}}</mat-card-title>\r\n            <mat-card-content>\r\n              <h3>{{ticket.sala}}</h3>\r\n              <h3>Asientos {{ticket.asientos.length}}</h3>\r\n              <h3>Hora: {{ticket.hora}}</h3>\r\n              <div *ngFor=\"let seat of ticket.asientos\">\r\n                <h4>\r\n                  {{seat.nombre}} \r\n                  <!--<button mat-button  (click)=\"handleCancelarButton(seat, ticket.asientos.length)\">Cancelar</button>-->\r\n                  <button mat-button (click)=\"openDialog(seat, ticket.asientos.length)\">Cancelar</button>\r\n                  <button mat-button (click)=\"handlePrintButton(ticket, seat)\">Imprimir</button>\r\n                </h4>\r\n              </div>\r\n            </mat-card-content>\r\n          </mat-card>\r\n      </mat-card-content>\r\n    </mat-card>\r\n  </div>\r\n  <br><br>\r\n  <div class=\"user-tickets-container\">\r\n    <mat-card>\r\n      <mat-card-title>Seleccione ticket por venta</mat-card-title>\r\n      <mat-card-content *ngIf=\"!userTickets\" class=\"no-tickets\">\r\n        <h2>Ningun ticket encontrado</h2>\r\n      </mat-card-content>\r\n      <mat-card-content *ngIf=\"userTickets\" class=\"tickets-list\">\r\n        <mat-card *ngFor=\"let ticket of userTickets\" class=\"ticket\">\r\n          <mat-card-title>{{ticket.pelicula}}</mat-card-title>\r\n          <mat-card-content>\r\n            <h3>{{ticket.sala}}</h3>\r\n            <h3>Asientos {{ticket.asientos.length}}</h3>\r\n            <h3>Hora: {{ticket.hora}}</h3>\r\n            <div *ngFor=\"let seat of ticket.asientos\">\r\n              <h4>\r\n                {{seat.nombre}} \r\n                <!--<button mat-button  (click)=\"handleCancelarButton(seat, ticket.asientos.length)\">Cancelar</button>-->\r\n                <button mat-button (click)=\"openDialog(seat, ticket.asientos.length)\">Cancelar</button>\r\n                <button mat-button (click)=\"handlePrintButton(ticket, seat)\">Imprimir</button>\r\n              </h4>\r\n            </div>\r\n          </mat-card-content>\r\n        </mat-card>\r\n      </mat-card-content>\r\n      <br>\r\n    </mat-card>\r\n  </div>\r\n</mat-card>"
 
 /***/ }),
 
@@ -226,10 +237,10 @@ var AppComponent = /** @class */ (function () {
     function AppComponent(oauthService) {
         this.oauthService = oauthService;
         this.title = 'taquilla';
-        this.oauthService.tokenEndpoint = "https://taquilla.plazasanjavier.com/oauth/token";
-        this.oauthService.userinfoEndpoint = "https://taquilla.plazasanjavier.com/identity";
-        //this.oauthService.tokenEndpoint = "http://taquilla.localhost/oauth/token";
-        //this.oauthService.userinfoEndpoint = "http://taquilla.localhost/identity";
+        //this.oauthService.tokenEndpoint = "https://taquilla.plazasanjavier.com/oauth/token";
+        //this.oauthService.userinfoEndpoint = "https://taquilla.plazasanjavier.com/identity";
+        this.oauthService.tokenEndpoint = "http://taquilla.localhost/oauth/token";
+        this.oauthService.userinfoEndpoint = "http://taquilla.localhost/identity";
         this.oauthService.clientId = "taquillaClient";
         this.oauthService.scope = "openid offline_access";
         this.oauthService.dummyClientSecret = "@4816152342";
@@ -364,6 +375,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -378,6 +390,10 @@ var AppModule = /** @class */ (function () {
                 _reservaciones_reservaciones_component__WEBPACK_IMPORTED_MODULE_12__["ReservacionesComponent"],
                 _login_login_component__WEBPACK_IMPORTED_MODULE_13__["LoginComponent"],
                 _cartelera_cartelera_component__WEBPACK_IMPORTED_MODULE_14__["CarteleraComponent"],
+                _reimpresion_reimpresion_component__WEBPACK_IMPORTED_MODULE_10__["CancelacionModal"],
+            ],
+            entryComponents: [
+                _reimpresion_reimpresion_component__WEBPACK_IMPORTED_MODULE_10__["CancelacionModal"],
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -595,19 +611,18 @@ var CambioComponent = /** @class */ (function () {
         });
     };
     CambioComponent.prototype.handlePrintButton = function () {
-        this.cancelarBoleto();
+        //this.cancelarBoleto();
     };
-    CambioComponent.prototype.cancelarBoleto = function () {
-        var _this = this;
-        var deleteAll = this.seatCount <= 1 ? 1 : 0;
-        this.cancelarService.cancelTicket(this.seatToChage.id_relacion_boleto, deleteAll)
-            .subscribe(function (response) {
-            _this.payTickets();
-        }, function (error) {
-            console.log(error);
-            return false;
-        });
-    };
+    /*private cancelarBoleto() {
+      let deleteAll = this.seatCount <= 1 ? 1:0;
+      this.cancelarService.cancelTicket(this.seatToChage.id_relacion_boleto, deleteAll)
+      .subscribe((response: any) => {
+        this.payTickets();
+      }, error => {
+        console.log(error);
+        return false;
+      });
+    }*/
     CambioComponent.prototype.handleCambioButtonCode = function (seat, seatCount) {
         this.seatToChage = seat;
         this.seatCount = seatCount;
@@ -939,12 +954,13 @@ module.exports = ".header-container {\n  margin-bottom: 25px;\n}\n\n.reimpresion
 /*!******************************************************!*\
   !*** ./src/app/reimpresion/reimpresion.component.ts ***!
   \******************************************************/
-/*! exports provided: ReimpresionComponent */
+/*! exports provided: ReimpresionComponent, CancelacionModal */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReimpresionComponent", function() { return ReimpresionComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CancelacionModal", function() { return CancelacionModal; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
@@ -952,6 +968,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_cancelar_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/cancelar.service */ "./src/app/services/cancelar.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var angular_oauth2_oidc__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! angular-oauth2-oidc */ "./node_modules/angular-oauth2-oidc/fesm5/angular-oauth2-oidc.js");
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm5/dialog.es5.js");
+/* harmony import */ var ng6_toastr_notifications__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ng6-toastr-notifications */ "./node_modules/ng6-toastr-notifications/fesm5/ng6-toastr-notifications.js");
+
+
 
 
 
@@ -960,11 +980,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ReimpresionComponent = /** @class */ (function () {
-    function ReimpresionComponent(ticketsService, cancelarService, router, oauthService) {
+    function ReimpresionComponent(ticketsService, cancelarService, router, oauthService, dialog, toastr) {
         this.ticketsService = ticketsService;
         this.cancelarService = cancelarService;
         this.router = router;
         this.oauthService = oauthService;
+        this.dialog = dialog;
+        this.toastr = toastr;
         this.searchForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
             codigoBoleto: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
         });
@@ -1032,21 +1054,21 @@ var ReimpresionComponent = /** @class */ (function () {
             console.log(error);
         });
     };
-    ReimpresionComponent.prototype.handleCancelarButton = function (seat, seatCount) {
+    ReimpresionComponent.prototype.handleCancelarButton = function (seat, seatCount, user, password, motivo) {
         var _this = this;
         var deleteAll = seatCount <= 1 ? 1 : 0;
-        this.cancelarService.cancelTicket(seat.id_relacion_boleto, deleteAll)
+        this.cancelarService.cancelTicket(seat.id_relacion_boleto, deleteAll, user, password, motivo)
             .subscribe(function (response) {
-            console.log(response);
+            _this.toastr.successToastr('Boleto cancelado!');
             _this.getCurrentUserTickets();
         }, function (error) {
-            console.log(error);
+            _this.toastr.errorToastr(error.error.message);
         });
     };
-    ReimpresionComponent.prototype.handleCancelarButtonCode = function (seat, seatCount) {
+    ReimpresionComponent.prototype.handleCancelarButtonCode = function (seat, seatCount, user, password, motivo) {
         var _this = this;
         var deleteAll = seatCount <= 1 ? 1 : 0;
-        this.cancelarService.cancelTicket(seat.id_relacion_boleto, deleteAll)
+        this.cancelarService.cancelTicket(seat.id_relacion_boleto, deleteAll, user, password, motivo)
             .subscribe(function (response) {
             console.log(response);
             _this.getTickets();
@@ -1068,11 +1090,31 @@ var ReimpresionComponent = /** @class */ (function () {
         var newDformat = dia.charAt(0).toUpperCase() + dia.slice(1) + " " + diaNumber + " " + month.charAt(0).toUpperCase() + month.slice(1) + " " + year;
         return newDformat;
     };
+    ReimpresionComponent.prototype.openDialog = function (seat, seatCount) {
+        var _this = this;
+        var dialogRef = this.dialog.open(CancelacionModal, {
+            width: '250px',
+            data: {
+                user: this.user,
+                password: this.password,
+                motivo: this.motivo,
+                seat: seat,
+                seatCount: seatCount
+            }
+        });
+        dialogRef.afterClosed().subscribe(function (result) {
+            console.log('The dialog was closed');
+            _this.handleCancelarButton(result.seat, result.seatCount, result.user, result.password, result.motivo);
+            console.log(result);
+        });
+    };
     ReimpresionComponent.ctorParameters = function () { return [
         { type: _services_tickets_service__WEBPACK_IMPORTED_MODULE_3__["TicketsService"] },
         { type: _services_cancelar_service__WEBPACK_IMPORTED_MODULE_4__["CancelarService"] },
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] },
-        { type: angular_oauth2_oidc__WEBPACK_IMPORTED_MODULE_6__["OAuthService"] }
+        { type: angular_oauth2_oidc__WEBPACK_IMPORTED_MODULE_6__["OAuthService"] },
+        { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_7__["MatDialog"] },
+        { type: ng6_toastr_notifications__WEBPACK_IMPORTED_MODULE_8__["ToastrManager"] }
     ]; };
     ReimpresionComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1082,6 +1124,28 @@ var ReimpresionComponent = /** @class */ (function () {
         })
     ], ReimpresionComponent);
     return ReimpresionComponent;
+}());
+
+var CancelacionModal = /** @class */ (function () {
+    function CancelacionModal(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+    }
+    CancelacionModal.prototype.onNoClick = function () {
+        this.dialogRef.close();
+    };
+    CancelacionModal.ctorParameters = function () { return [
+        { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_7__["MatDialogRef"] },
+        { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_7__["MAT_DIALOG_DATA"],] }] }
+    ]; };
+    CancelacionModal = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'cancelacion-modal',
+            template: __webpack_require__(/*! raw-loader!./cancelacion-modal.html */ "./node_modules/raw-loader/index.js!./src/app/reimpresion/cancelacion-modal.html"),
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material_dialog__WEBPACK_IMPORTED_MODULE_7__["MAT_DIALOG_DATA"]))
+    ], CancelacionModal);
+    return CancelacionModal;
 }());
 
 
@@ -1484,13 +1548,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var CancelarService = /** @class */ (function () {
-    //private apiUrl = 'https://taquilla.localhost';
+    //private apiUrl = 'http://taquilla.localhost';
     function CancelarService(httpClient) {
         this.httpClient = httpClient;
         this.apiUrl = 'https://taquilla.plazasanjavier.com';
     }
-    CancelarService.prototype.cancelTicket = function (boletoAsientoId, delelteAll) {
-        return this.httpClient.delete(this.apiUrl + "/boletos/cancelar/" + boletoAsientoId + "/" + delelteAll);
+    CancelarService.prototype.cancelTicket = function (boletoAsientoId, delelteAll, user, password, motivo) {
+        //make the body params
+        var data = {
+            'user': user,
+            'pass': password,
+            'motivo': motivo
+        };
+        return this.httpClient.post(this.apiUrl + "/boletos/cancelar/" + boletoAsientoId + "/" + delelteAll, data);
     };
     CancelarService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }

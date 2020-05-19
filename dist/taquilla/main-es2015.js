@@ -234,10 +234,10 @@ let AppComponent = class AppComponent {
     constructor(oauthService) {
         this.oauthService = oauthService;
         this.title = 'taquilla';
-        //this.oauthService.tokenEndpoint = "https://taquilla.plazasanjavier.com/oauth/token";
-        //this.oauthService.userinfoEndpoint = "https://taquilla.plazasanjavier.com/identity";
-        this.oauthService.tokenEndpoint = "http://taquilla.localhost/oauth/token";
-        this.oauthService.userinfoEndpoint = "http://taquilla.localhost/identity";
+        this.oauthService.tokenEndpoint = "https://taquilla.plazasanjavier.com/oauth/token";
+        this.oauthService.userinfoEndpoint = "https://taquilla.plazasanjavier.com/identity";
+        //this.oauthService.tokenEndpoint = "http://taquilla.localhost/oauth/token";
+        //this.oauthService.userinfoEndpoint = "http://taquilla.localhost/identity";
         this.oauthService.clientId = "taquillaClient";
         this.oauthService.scope = "openid offline_access";
         this.oauthService.dummyClientSecret = "@4816152342";
@@ -1515,10 +1515,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let CancelarService = class CancelarService {
+    //private apiUrl = 'http://taquilla.localhost';
     constructor(httpClient) {
         this.httpClient = httpClient;
-        //private apiUrl = 'https://taquilla.plazasanjavier.com';
-        this.apiUrl = 'http://taquilla.localhost';
+        this.apiUrl = 'https://taquilla.plazasanjavier.com';
     }
     cancelTicket(boletoAsientoId, delelteAll, user, password, motivo) {
         //make the body params
@@ -1560,10 +1560,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let PagosService = class PagosService {
+    //private apiUrl = 'http://taquilla.localhost';
     constructor(httpClient) {
         this.httpClient = httpClient;
-        //private apiUrl = 'https://taquilla.plazasanjavier.com';
-        this.apiUrl = 'http://taquilla.localhost';
+        this.apiUrl = 'https://taquilla.plazasanjavier.com';
     }
     payTickets(horarioId, paymentData) {
         return this.httpClient.post(`${this.apiUrl}/boletos/horario/${horarioId}/pagar`, paymentData);
@@ -1645,10 +1645,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ReporteService = class ReporteService {
+    //private apiUrl = 'http://taquilla.localhost';
     constructor(httpClient) {
         this.httpClient = httpClient;
-        //private apiUrl = 'https://taquilla.plazasanjavier.com';
-        this.apiUrl = 'http://taquilla.localhost';
+        this.apiUrl = 'https://taquilla.plazasanjavier.com';
     }
     getReport(boletoCreado, username) {
         return this.httpClient.get(`${this.apiUrl}/reportes/ventas/dia?boleto_creado=${boletoCreado}?username=${username}`);
@@ -1684,10 +1684,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SalasService = class SalasService {
+    //private apiUrl = 'http://mobile.localhost';
     constructor(httpClient) {
         this.httpClient = httpClient;
-        //private apiUrl = ' https://mobile.plazasanjavier.com';
-        this.apiUrl = 'http://mobile.localhost';
+        this.apiUrl = ' https://mobile.plazasanjavier.com';
     }
     getSalaById(salaId) {
         return this.httpClient.get(`${this.apiUrl}/horario/${salaId}/sala`);
@@ -1725,11 +1725,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let TicketsService = class TicketsService {
+    //private apiUrl = 'http://taquilla.localhost';
     constructor(httpClient, oauthService) {
         this.httpClient = httpClient;
         this.oauthService = oauthService;
-        //private apiUrl = 'https://taquilla.plazasanjavier.com';
-        this.apiUrl = 'http://taquilla.localhost';
+        this.apiUrl = 'https://taquilla.plazasanjavier.com';
     }
     getByCodigo(codigoBoleto) {
         return this.httpClient.get(`${this.apiUrl}/boletos/code/${codigoBoleto}`);

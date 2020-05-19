@@ -5,8 +5,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CancelarService {
-  //private apiUrl = 'https://taquilla.plazasanjavier.com';
-  private apiUrl = 'http://taquilla.localhost';
+  private apiUrl = 'https://taquilla.plazasanjavier.com';
+  //private apiUrl = 'http://taquilla.localhost';
   
   constructor(
     private httpClient: HttpClient

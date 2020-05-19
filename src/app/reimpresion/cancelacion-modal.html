@@ -10,10 +10,10 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Motivo</mat-label>
-    <input matInput [(ngModel)]="data.motivo">
+    <input matInput [(ngModel)]="data.motivo"  maxlength="255">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cerrar</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Cancelar</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Cancelar Boleto</button>
 </div>

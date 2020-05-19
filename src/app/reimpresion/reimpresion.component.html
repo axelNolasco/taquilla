@@ -38,7 +38,7 @@
                 <h4>
                   {{seat.nombre}} 
                   <!--<button mat-button  (click)="handleCancelarButton(seat, ticket.asientos.length)">Cancelar</button>-->
-                  <button mat-button (click)="openDialog(seat, ticket.asientos.length)">Cancelar</button>
+                  <button mat-button (click)="openDialog(seat, ticket.asientos.length, true)">Cancelar</button>
                   <button mat-button (click)="handlePrintButton(ticket, seat)">Imprimir</button>
                 </h4>
               </div>
@@ -65,7 +65,7 @@
               <h4>
                 {{seat.nombre}} 
                 <!--<button mat-button  (click)="handleCancelarButton(seat, ticket.asientos.length)">Cancelar</button>-->
-                <button mat-button (click)="openDialog(seat, ticket.asientos.length)">Cancelar</button>
+                <button mat-button (click)="openDialog(seat, ticket.asientos.length, false)">Cancelar</button>
                 <button mat-button (click)="handlePrintButton(ticket, seat)">Imprimir</button>
               </h4>
             </div>

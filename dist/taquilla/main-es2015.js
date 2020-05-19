@@ -74,7 +74,7 @@ module.exports = "<mat-card>\r\n  <mat-card-title>Taquilla Plaza San Javier</mat
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1 mat-dialog-title>Cancelacion </h1>\r\n<div mat-dialog-content>\r\n  <mat-form-field>\r\n    <mat-label>Usuario</mat-label>\r\n    <input matInput [(ngModel)]=\"data.user\">\r\n  </mat-form-field>\r\n  <mat-form-field>\r\n    <mat-label>Password</mat-label>\r\n    <input type=\"password\" matInput [(ngModel)]=\"data.password\">\r\n  </mat-form-field>\r\n  <mat-form-field>\r\n    <mat-label>Motivo</mat-label>\r\n    <input matInput [(ngModel)]=\"data.motivo\">\r\n  </mat-form-field>\r\n</div>\r\n<div mat-dialog-actions>\r\n  <button mat-button (click)=\"onNoClick()\">Cerrar</button>\r\n  <button mat-button [mat-dialog-close]=\"data\" cdkFocusInitial>Cancelar</button>\r\n</div>"
+module.exports = "<h1 mat-dialog-title>Cancelacion </h1>\r\n<div mat-dialog-content>\r\n  <mat-form-field>\r\n    <mat-label>Usuario</mat-label>\r\n    <input matInput [(ngModel)]=\"data.user\">\r\n  </mat-form-field>\r\n  <mat-form-field>\r\n    <mat-label>Password</mat-label>\r\n    <input type=\"password\" matInput [(ngModel)]=\"data.password\">\r\n  </mat-form-field>\r\n  <mat-form-field>\r\n    <mat-label>Motivo</mat-label>\r\n    <input matInput [(ngModel)]=\"data.motivo\"  maxlength=\"255\">\r\n  </mat-form-field>\r\n</div>\r\n<div mat-dialog-actions>\r\n  <button mat-button (click)=\"onNoClick()\">Cerrar</button>\r\n  <button mat-button [mat-dialog-close]=\"data\" cdkFocusInitial>Cancelar Boleto</button>\r\n</div>"
 
 /***/ }),
 
@@ -85,7 +85,7 @@ module.exports = "<h1 mat-dialog-title>Cancelacion </h1>\r\n<div mat-dialog-cont
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card>\r\n  <div class=\"header-container\">\r\n    <h1 class=\"reimpresion-label\">Reimprimir boletos</h1>\r\n    <div class=\"side-menu\">\r\n      <button\r\n      mat-button\r\n      routerLink=\"/taquilla\"><h3>Volver</h3></button>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"search-container\">\r\n    <mat-card>\r\n      <mat-card-title>Ingrese datos de busqueda</mat-card-title>\r\n      <br>\r\n      <mat-card-content>\r\n        <form [formGroup]=\"searchForm\" (ngSubmit)=\"handleSearchEvent()\">\r\n          <mat-form-field>\r\n            <input type=\"text\" matInput placeholder=\"Codigo Boleto\" formControlName=\"codigoBoleto\">\r\n          </mat-form-field>\r\n          <button type=\"submit\" mat-button>Buscar</button>\r\n          <button mat-button (click)=\"handleResetButton(); $event.stopPropagation();\">Reiniciar</button>\r\n        </form>\r\n      </mat-card-content>\r\n    </mat-card>\r\n    <mat-card *ngIf=\"showSearchResults\" class=\"search-results\">\r\n      <mat-card-content *ngIf=\"!ticketsFound\" class=\"no-tickets\">\r\n        <h2>Ningun boleto encontrado</h2>\r\n      </mat-card-content>\r\n      <mat-card-content *ngIf=\"ticketsFound\" class=\"tickets-list\">\r\n          <h2>Boleto encontrado</h2>\r\n        <mat-card *ngFor=\"let ticket of ticketsFound\" class=\"ticket\">\r\n            <mat-card-title>{{ticket.pelicula}}</mat-card-title>\r\n            <mat-card-content>\r\n              <h3>{{ticket.sala}}</h3>\r\n              <h3>Asientos {{ticket.asientos.length}}</h3>\r\n              <h3>Hora: {{ticket.hora}}</h3>\r\n              <div *ngFor=\"let seat of ticket.asientos\">\r\n                <h4>\r\n                  {{seat.nombre}} \r\n                  <!--<button mat-button  (click)=\"handleCancelarButton(seat, ticket.asientos.length)\">Cancelar</button>-->\r\n                  <button mat-button (click)=\"openDialog(seat, ticket.asientos.length)\">Cancelar</button>\r\n                  <button mat-button (click)=\"handlePrintButton(ticket, seat)\">Imprimir</button>\r\n                </h4>\r\n              </div>\r\n            </mat-card-content>\r\n          </mat-card>\r\n      </mat-card-content>\r\n    </mat-card>\r\n  </div>\r\n  <br><br>\r\n  <div class=\"user-tickets-container\">\r\n    <mat-card>\r\n      <mat-card-title>Seleccione ticket por venta</mat-card-title>\r\n      <mat-card-content *ngIf=\"!userTickets\" class=\"no-tickets\">\r\n        <h2>Ningun ticket encontrado</h2>\r\n      </mat-card-content>\r\n      <mat-card-content *ngIf=\"userTickets\" class=\"tickets-list\">\r\n        <mat-card *ngFor=\"let ticket of userTickets\" class=\"ticket\">\r\n          <mat-card-title>{{ticket.pelicula}}</mat-card-title>\r\n          <mat-card-content>\r\n            <h3>{{ticket.sala}}</h3>\r\n            <h3>Asientos {{ticket.asientos.length}}</h3>\r\n            <h3>Hora: {{ticket.hora}}</h3>\r\n            <div *ngFor=\"let seat of ticket.asientos\">\r\n              <h4>\r\n                {{seat.nombre}} \r\n                <!--<button mat-button  (click)=\"handleCancelarButton(seat, ticket.asientos.length)\">Cancelar</button>-->\r\n                <button mat-button (click)=\"openDialog(seat, ticket.asientos.length)\">Cancelar</button>\r\n                <button mat-button (click)=\"handlePrintButton(ticket, seat)\">Imprimir</button>\r\n              </h4>\r\n            </div>\r\n          </mat-card-content>\r\n        </mat-card>\r\n      </mat-card-content>\r\n      <br>\r\n    </mat-card>\r\n  </div>\r\n</mat-card>"
+module.exports = "<mat-card>\r\n  <div class=\"header-container\">\r\n    <h1 class=\"reimpresion-label\">Reimprimir boletos</h1>\r\n    <div class=\"side-menu\">\r\n      <button\r\n      mat-button\r\n      routerLink=\"/taquilla\"><h3>Volver</h3></button>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"search-container\">\r\n    <mat-card>\r\n      <mat-card-title>Ingrese datos de busqueda</mat-card-title>\r\n      <br>\r\n      <mat-card-content>\r\n        <form [formGroup]=\"searchForm\" (ngSubmit)=\"handleSearchEvent()\">\r\n          <mat-form-field>\r\n            <input type=\"text\" matInput placeholder=\"Codigo Boleto\" formControlName=\"codigoBoleto\">\r\n          </mat-form-field>\r\n          <button type=\"submit\" mat-button>Buscar</button>\r\n          <button mat-button (click)=\"handleResetButton(); $event.stopPropagation();\">Reiniciar</button>\r\n        </form>\r\n      </mat-card-content>\r\n    </mat-card>\r\n    <mat-card *ngIf=\"showSearchResults\" class=\"search-results\">\r\n      <mat-card-content *ngIf=\"!ticketsFound\" class=\"no-tickets\">\r\n        <h2>Ningun boleto encontrado</h2>\r\n      </mat-card-content>\r\n      <mat-card-content *ngIf=\"ticketsFound\" class=\"tickets-list\">\r\n          <h2>Boleto encontrado</h2>\r\n        <mat-card *ngFor=\"let ticket of ticketsFound\" class=\"ticket\">\r\n            <mat-card-title>{{ticket.pelicula}}</mat-card-title>\r\n            <mat-card-content>\r\n              <h3>{{ticket.sala}}</h3>\r\n              <h3>Asientos {{ticket.asientos.length}}</h3>\r\n              <h3>Hora: {{ticket.hora}}</h3>\r\n              <div *ngFor=\"let seat of ticket.asientos\">\r\n                <h4>\r\n                  {{seat.nombre}} \r\n                  <!--<button mat-button  (click)=\"handleCancelarButton(seat, ticket.asientos.length)\">Cancelar</button>-->\r\n                  <button mat-button (click)=\"openDialog(seat, ticket.asientos.length, true)\">Cancelar</button>\r\n                  <button mat-button (click)=\"handlePrintButton(ticket, seat)\">Imprimir</button>\r\n                </h4>\r\n              </div>\r\n            </mat-card-content>\r\n          </mat-card>\r\n      </mat-card-content>\r\n    </mat-card>\r\n  </div>\r\n  <br><br>\r\n  <div class=\"user-tickets-container\">\r\n    <mat-card>\r\n      <mat-card-title>Seleccione ticket por venta</mat-card-title>\r\n      <mat-card-content *ngIf=\"!userTickets\" class=\"no-tickets\">\r\n        <h2>Ningun ticket encontrado</h2>\r\n      </mat-card-content>\r\n      <mat-card-content *ngIf=\"userTickets\" class=\"tickets-list\">\r\n        <mat-card *ngFor=\"let ticket of userTickets\" class=\"ticket\">\r\n          <mat-card-title>{{ticket.pelicula}}</mat-card-title>\r\n          <mat-card-content>\r\n            <h3>{{ticket.sala}}</h3>\r\n            <h3>Asientos {{ticket.asientos.length}}</h3>\r\n            <h3>Hora: {{ticket.hora}}</h3>\r\n            <div *ngFor=\"let seat of ticket.asientos\">\r\n              <h4>\r\n                {{seat.nombre}} \r\n                <!--<button mat-button  (click)=\"handleCancelarButton(seat, ticket.asientos.length)\">Cancelar</button>-->\r\n                <button mat-button (click)=\"openDialog(seat, ticket.asientos.length, false)\">Cancelar</button>\r\n                <button mat-button (click)=\"handlePrintButton(ticket, seat)\">Imprimir</button>\r\n              </h4>\r\n            </div>\r\n          </mat-card-content>\r\n        </mat-card>\r\n      </mat-card-content>\r\n      <br>\r\n    </mat-card>\r\n  </div>\r\n</mat-card>"
 
 /***/ }),
 
@@ -234,10 +234,10 @@ let AppComponent = class AppComponent {
     constructor(oauthService) {
         this.oauthService = oauthService;
         this.title = 'taquilla';
-        this.oauthService.tokenEndpoint = "https://taquilla.plazasanjavier.com/oauth/token";
-        this.oauthService.userinfoEndpoint = "https://taquilla.plazasanjavier.com/identity";
-        //this.oauthService.tokenEndpoint = "http://taquilla.localhost/oauth/token";
-        //this.oauthService.userinfoEndpoint = "http://taquilla.localhost/identity";
+        //this.oauthService.tokenEndpoint = "https://taquilla.plazasanjavier.com/oauth/token";
+        //this.oauthService.userinfoEndpoint = "https://taquilla.plazasanjavier.com/identity";
+        this.oauthService.tokenEndpoint = "http://taquilla.localhost/oauth/token";
+        this.oauthService.userinfoEndpoint = "http://taquilla.localhost/identity";
         this.oauthService.clientId = "taquillaClient";
         this.oauthService.scope = "openid offline_access";
         this.oauthService.dummyClientSecret = "@4816152342";
@@ -926,7 +926,7 @@ LoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".header-container {\n  margin-bottom: 25px;\n}\n\n.reimpresion-label {\n  display: inline-block;\n}\n\n.side-menu {\n  float: right;\n}\n\n.side-menu button {\n  color: #FFFFFF;\n  background-color: #3f51b5;\n  min-width: 150px;\n  margin-left: 10px;\n}\n\nmat-form-field {\n  margin-right: 25px;\n}\n\ninput {\n  width: 250px;\n}\n\n.no-tickets {\n  text-align: center;\n}\n\n.search-results {\n  margin-top: 25px;\n}\n\n.tickets-list {\n  text-align: left;\n}\n\n.ticket {\n  display: inline-block;\n  padding: 20px;\n  margin: 10px;\n  min-width: 200px;\n}\n\n.print-button {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcmVpbXByZXNpb24vQzpcXFVzZXJzXFxyb2Rzb2Z0XFxEb2N1bWVudHNcXFJvZHNvZnRcXHdlYlxcdGFxdWlsbGEvc3JjXFxhcHBcXHJlaW1wcmVzaW9uXFxyZWltcHJlc2lvbi5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvcmVpbXByZXNpb24vcmVpbXByZXNpb24uY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxtQkFBQTtBQ0NGOztBREVBO0VBQ0UscUJBQUE7QUNDRjs7QURFQTtFQUNFLFlBQUE7QUNDRjs7QURFQTtFQUNFLGNBQUE7RUFDQSx5QkFBQTtFQUNBLGdCQUFBO0VBQ0EsaUJBQUE7QUNDRjs7QURFQTtFQUNFLGtCQUFBO0FDQ0Y7O0FERUE7RUFDRSxZQUFBO0FDQ0Y7O0FERUE7RUFDRSxrQkFBQTtBQ0NGOztBREVBO0VBQ0UsZ0JBQUE7QUNDRjs7QURFQTtFQUNFLGdCQUFBO0FDQ0Y7O0FERUE7RUFDRSxxQkFBQTtFQUNBLGFBQUE7RUFDQSxZQUFBO0VBQ0EsZ0JBQUE7QUNDRjs7QURFQTtFQUNFLGtCQUFBO0VBQ0EsWUFBQTtFQUNBLFdBQUE7QUNDRiIsImZpbGUiOiJzcmMvYXBwL3JlaW1wcmVzaW9uL3JlaW1wcmVzaW9uLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmhlYWRlci1jb250YWluZXIge1xyXG4gIG1hcmdpbi1ib3R0b206IDI1cHg7XHJcbn1cclxuXHJcbi5yZWltcHJlc2lvbi1sYWJlbCB7XHJcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG59XHJcblxyXG4uc2lkZS1tZW51IHtcclxuICBmbG9hdDogcmlnaHQ7XHJcbn1cclxuXHJcbi5zaWRlLW1lbnUgYnV0dG9uIHtcclxuICBjb2xvcjogI0ZGRkZGRjtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjM2Y1MWI1O1xyXG4gIG1pbi13aWR0aDogMTUwcHg7XHJcbiAgbWFyZ2luLWxlZnQ6IDEwcHg7XHJcbn1cclxuXHJcbm1hdC1mb3JtLWZpZWxkIHtcclxuICBtYXJnaW4tcmlnaHQ6IDI1cHg7XHJcbn1cclxuXHJcbmlucHV0IHtcclxuICB3aWR0aDogMjUwcHg7XHJcbn1cclxuXHJcbi5uby10aWNrZXRzIHtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn1cclxuXHJcbi5zZWFyY2gtcmVzdWx0cyB7XHJcbiAgbWFyZ2luLXRvcDogMjVweDtcclxufVxyXG5cclxuLnRpY2tldHMtbGlzdCB7XHJcbiAgdGV4dC1hbGlnbjogbGVmdDtcclxufVxyXG5cclxuLnRpY2tldCB7XHJcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gIHBhZGRpbmc6IDIwcHg7XHJcbiAgbWFyZ2luOiAxMHB4O1xyXG4gIG1pbi13aWR0aDogMjAwcHg7XHJcbn1cclxuXHJcbi5wcmludC1idXR0b24ge1xyXG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICBib3R0b206IDEwcHg7XHJcbiAgcmlnaHQ6IDEwcHg7XHJcbn0iLCIuaGVhZGVyLWNvbnRhaW5lciB7XG4gIG1hcmdpbi1ib3R0b206IDI1cHg7XG59XG5cbi5yZWltcHJlc2lvbi1sYWJlbCB7XG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbn1cblxuLnNpZGUtbWVudSB7XG4gIGZsb2F0OiByaWdodDtcbn1cblxuLnNpZGUtbWVudSBidXR0b24ge1xuICBjb2xvcjogI0ZGRkZGRjtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzNmNTFiNTtcbiAgbWluLXdpZHRoOiAxNTBweDtcbiAgbWFyZ2luLWxlZnQ6IDEwcHg7XG59XG5cbm1hdC1mb3JtLWZpZWxkIHtcbiAgbWFyZ2luLXJpZ2h0OiAyNXB4O1xufVxuXG5pbnB1dCB7XG4gIHdpZHRoOiAyNTBweDtcbn1cblxuLm5vLXRpY2tldHMge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbi5zZWFyY2gtcmVzdWx0cyB7XG4gIG1hcmdpbi10b3A6IDI1cHg7XG59XG5cbi50aWNrZXRzLWxpc3Qge1xuICB0ZXh0LWFsaWduOiBsZWZ0O1xufVxuXG4udGlja2V0IHtcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICBwYWRkaW5nOiAyMHB4O1xuICBtYXJnaW46IDEwcHg7XG4gIG1pbi13aWR0aDogMjAwcHg7XG59XG5cbi5wcmludC1idXR0b24ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGJvdHRvbTogMTBweDtcbiAgcmlnaHQ6IDEwcHg7XG59Il19 */"
+module.exports = ".header-container {\n  margin-bottom: 25px;\n}\n\n.reimpresion-label {\n  display: inline-block;\n}\n\n.side-menu {\n  float: right;\n}\n\n.side-menu button {\n  color: #FFFFFF;\n  background-color: #3f51b5;\n  min-width: 150px;\n  margin-left: 10px;\n}\n\nmat-form-field {\n  margin-right: 25px;\n}\n\ninput {\n  width: 250px;\n}\n\n.no-tickets {\n  text-align: center;\n}\n\n.search-results {\n  margin-top: 25px;\n}\n\n.tickets-list {\n  text-align: left;\n}\n\n.ticket {\n  display: inline-block;\n  padding: 20px;\n  margin: 10px;\n  min-width: 200px;\n}\n\n.print-button {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcmVpbXByZXNpb24vQzpcXFVzZXJzXFxyb2Rzb2Z0XFxEb2N1bWVudHNcXFJvZHNvZnRcXHdlYlxcdGFxdWlsbGEvc3JjXFxhcHBcXHJlaW1wcmVzaW9uXFxyZWltcHJlc2lvbi5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvcmVpbXByZXNpb24vcmVpbXByZXNpb24uY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxtQkFBQTtBQ0NGOztBREVBO0VBQ0UscUJBQUE7QUNDRjs7QURFQTtFQUNFLFlBQUE7QUNDRjs7QURFQTtFQUNFLGNBQUE7RUFDQSx5QkFBQTtFQUNBLGdCQUFBO0VBQ0EsaUJBQUE7QUNDRjs7QURFQTtFQUNFLGtCQUFBO0FDQ0Y7O0FERUE7RUFDRSxZQUFBO0FDQ0Y7O0FERUE7RUFDRSxrQkFBQTtBQ0NGOztBREVBO0VBQ0UsZ0JBQUE7QUNDRjs7QURFQTtFQUNFLGdCQUFBO0FDQ0Y7O0FERUE7RUFDRSxxQkFBQTtFQUNBLGFBQUE7RUFDQSxZQUFBO0VBQ0EsZ0JBQUE7QUNDRjs7QURFQTtFQUNFLGtCQUFBO0VBQ0EsWUFBQTtFQUNBLFdBQUE7QUNDRiIsImZpbGUiOiJzcmMvYXBwL3JlaW1wcmVzaW9uL3JlaW1wcmVzaW9uLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmhlYWRlci1jb250YWluZXIge1xyXG4gIG1hcmdpbi1ib3R0b206IDI1cHg7XHJcbn1cclxuXHJcbi5yZWltcHJlc2lvbi1sYWJlbCB7XHJcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG59XHJcblxyXG4uc2lkZS1tZW51IHtcclxuICBmbG9hdDogcmlnaHQ7XHJcbn1cclxuXHJcbi5zaWRlLW1lbnUgYnV0dG9uIHtcclxuICBjb2xvcjogI0ZGRkZGRjtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjM2Y1MWI1O1xyXG4gIG1pbi13aWR0aDogMTUwcHg7XHJcbiAgbWFyZ2luLWxlZnQ6IDEwcHg7XHJcbn1cclxuXHJcbm1hdC1mb3JtLWZpZWxkIHtcclxuICBtYXJnaW4tcmlnaHQ6IDI1cHg7XHJcbn1cclxuXHJcbmlucHV0IHtcclxuICB3aWR0aDogMjUwcHg7XHJcbn1cclxuXHJcbi5uby10aWNrZXRzIHtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn1cclxuXHJcbi5zZWFyY2gtcmVzdWx0cyB7XHJcbiAgbWFyZ2luLXRvcDogMjVweDtcclxufVxyXG5cclxuLnRpY2tldHMtbGlzdCB7XHJcbiAgdGV4dC1hbGlnbjogbGVmdDtcclxufVxyXG5cclxuLnRpY2tldCB7XHJcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gIHBhZGRpbmc6IDIwcHg7XHJcbiAgbWFyZ2luOiAxMHB4O1xyXG4gIG1pbi13aWR0aDogMjAwcHg7XHJcbn1cclxuXHJcbi5wcmludC1idXR0b24ge1xyXG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICBib3R0b206IDEwcHg7XHJcbiAgcmlnaHQ6IDEwcHg7XHJcbn1cclxuIiwiLmhlYWRlci1jb250YWluZXIge1xuICBtYXJnaW4tYm90dG9tOiAyNXB4O1xufVxuXG4ucmVpbXByZXNpb24tbGFiZWwge1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG59XG5cbi5zaWRlLW1lbnUge1xuICBmbG9hdDogcmlnaHQ7XG59XG5cbi5zaWRlLW1lbnUgYnV0dG9uIHtcbiAgY29sb3I6ICNGRkZGRkY7XG4gIGJhY2tncm91bmQtY29sb3I6ICMzZjUxYjU7XG4gIG1pbi13aWR0aDogMTUwcHg7XG4gIG1hcmdpbi1sZWZ0OiAxMHB4O1xufVxuXG5tYXQtZm9ybS1maWVsZCB7XG4gIG1hcmdpbi1yaWdodDogMjVweDtcbn1cblxuaW5wdXQge1xuICB3aWR0aDogMjUwcHg7XG59XG5cbi5uby10aWNrZXRzIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuXG4uc2VhcmNoLXJlc3VsdHMge1xuICBtYXJnaW4tdG9wOiAyNXB4O1xufVxuXG4udGlja2V0cy1saXN0IHtcbiAgdGV4dC1hbGlnbjogbGVmdDtcbn1cblxuLnRpY2tldCB7XG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgcGFkZGluZzogMjBweDtcbiAgbWFyZ2luOiAxMHB4O1xuICBtaW4td2lkdGg6IDIwMHB4O1xufVxuXG4ucHJpbnQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBib3R0b206IDEwcHg7XG4gIHJpZ2h0OiAxMHB4O1xufSJdfQ== */"
 
 /***/ }),
 
@@ -1066,9 +1066,9 @@ let ReimpresionComponent = class ReimpresionComponent {
         let newDformat = dia.charAt(0).toUpperCase() + dia.slice(1) + " " + diaNumber + " " + month.charAt(0).toUpperCase() + month.slice(1) + " " + year;
         return newDformat;
     }
-    openDialog(seat, seatCount) {
+    openDialog(seat, seatCount, byCode = false) {
         const dialogRef = this.dialog.open(CancelacionModal, {
-            width: '250px',
+            width: '260px',
             data: {
                 user: this.user,
                 password: this.password,
@@ -1079,8 +1079,12 @@ let ReimpresionComponent = class ReimpresionComponent {
         });
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
-            this.handleCancelarButton(result.seat, result.seatCount, result.user, result.password, result.motivo);
-            console.log(result);
+            if (byCode) {
+                this.handleCancelarButtonCode(result.seat, result.seatCount, result.user, result.password, result.motivo);
+            }
+            else {
+                this.handleCancelarButton(result.seat, result.seatCount, result.user, result.password, result.motivo);
+            }
         });
     }
 };
@@ -1511,10 +1515,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let CancelarService = class CancelarService {
-    //private apiUrl = 'http://taquilla.localhost';
     constructor(httpClient) {
         this.httpClient = httpClient;
-        this.apiUrl = 'https://taquilla.plazasanjavier.com';
+        //private apiUrl = 'https://taquilla.plazasanjavier.com';
+        this.apiUrl = 'http://taquilla.localhost';
     }
     cancelTicket(boletoAsientoId, delelteAll, user, password, motivo) {
         //make the body params
@@ -1556,10 +1560,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let PagosService = class PagosService {
-    //private apiUrl = 'http://taquilla.localhost';
     constructor(httpClient) {
         this.httpClient = httpClient;
-        this.apiUrl = 'https://taquilla.plazasanjavier.com';
+        //private apiUrl = 'https://taquilla.plazasanjavier.com';
+        this.apiUrl = 'http://taquilla.localhost';
     }
     payTickets(horarioId, paymentData) {
         return this.httpClient.post(`${this.apiUrl}/boletos/horario/${horarioId}/pagar`, paymentData);
@@ -1641,10 +1645,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ReporteService = class ReporteService {
-    //private apiUrl = 'http://taquilla.localhost';
     constructor(httpClient) {
         this.httpClient = httpClient;
-        this.apiUrl = 'https://taquilla.plazasanjavier.com';
+        //private apiUrl = 'https://taquilla.plazasanjavier.com';
+        this.apiUrl = 'http://taquilla.localhost';
     }
     getReport(boletoCreado, username) {
         return this.httpClient.get(`${this.apiUrl}/reportes/ventas/dia?boleto_creado=${boletoCreado}?username=${username}`);
@@ -1680,10 +1684,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SalasService = class SalasService {
-    //private apiUrl = 'http://mobile.localhost';
     constructor(httpClient) {
         this.httpClient = httpClient;
-        this.apiUrl = ' https://mobile.plazasanjavier.com';
+        //private apiUrl = ' https://mobile.plazasanjavier.com';
+        this.apiUrl = 'http://mobile.localhost';
     }
     getSalaById(salaId) {
         return this.httpClient.get(`${this.apiUrl}/horario/${salaId}/sala`);
@@ -1721,11 +1725,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let TicketsService = class TicketsService {
-    //private apiUrl = 'http://taquilla.localhost';
     constructor(httpClient, oauthService) {
         this.httpClient = httpClient;
         this.oauthService = oauthService;
-        this.apiUrl = 'https://taquilla.plazasanjavier.com';
+        //private apiUrl = 'https://taquilla.plazasanjavier.com';
+        this.apiUrl = 'http://taquilla.localhost';
     }
     getByCodigo(codigoBoleto) {
         return this.httpClient.get(`${this.apiUrl}/boletos/code/${codigoBoleto}`);

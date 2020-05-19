@@ -147,9 +147,9 @@ export class ReimpresionComponent implements OnInit {
     return newDformat;
   }
 
-  openDialog(seat, seatCount): void {
+  openDialog(seat, seatCount, byCode = false): void {
     const dialogRef = this.dialog.open(CancelacionModal, {
-      width: '250px',
+      width: '260px',
       data: {
         user:      this.user,
         password:  this.password,
@@ -161,8 +161,11 @@ export class ReimpresionComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.handleCancelarButton(result.seat, result.seatCount, result.user, result.password, result.motivo);
-      console.log(result);
+      if (byCode) {
+        this.handleCancelarButtonCode(result.seat, result.seatCount, result.user, result.password, result.motivo);
+      }else {
+        this.handleCancelarButton(result.seat, result.seatCount, result.user, result.password, result.motivo);
+      }      
     });
   }
 }

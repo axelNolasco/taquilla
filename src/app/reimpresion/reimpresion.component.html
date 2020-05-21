@@ -34,6 +34,7 @@
               <h3>{{ticket.sala}}</h3>
               <h3>Asientos {{ticket.asientos.length}}</h3>
               <h3>Hora: {{ticket.hora}}</h3>
+              <h3>Nombre: {{ticket.username}}</h3>
               <div *ngFor="let seat of ticket.asientos">
                 <h4>
                   {{seat.nombre}} 
@@ -61,6 +62,7 @@
             <h3>{{ticket.sala}}</h3>
             <h3>Asientos {{ticket.asientos.length}}</h3>
             <h3>Hora: {{ticket.hora}}</h3>
+            <h3>Nombre: {{ticket.username}}</h3>
             <div *ngFor="let seat of ticket.asientos">
               <h4>
                 {{seat.nombre}} 

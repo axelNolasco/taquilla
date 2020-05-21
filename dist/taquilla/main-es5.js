@@ -1208,7 +1208,8 @@ var ReporteComponent = /** @class */ (function () {
     };
     ReporteComponent.prototype.getReporte = function () {
         var _this = this;
-        this.reporteService.getReport(this.currentDate, "Taquilla")
+        var userData = this.oauthService.getIdentityClaims();
+        this.reporteService.getReport(this.currentDate, userData.username)
             .subscribe(function (response) {
             _this.reportData = _this.parseResponse(response);
         }, function (error) {

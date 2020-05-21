@@ -39,8 +39,9 @@ export class ReporteComponent implements OnInit {
         return [year, month, day].join('-');
     }
 
-    private getReporte() {        
-        this.reporteService.getReport(this.currentDate, "Taquilla")   
+    private getReporte() {   
+        let userData: any = this.oauthService.getIdentityClaims();     
+        this.reporteService.getReport(this.currentDate, userData.username)   
         .subscribe((response: any) => {            
             this.reportData = this.parseResponse(response);
           }, error => {

@@ -1179,7 +1179,8 @@ let ReporteComponent = class ReporteComponent {
         return [year, month, day].join('-');
     }
     getReporte() {
-        this.reporteService.getReport(this.currentDate, "Taquilla")
+        let userData = this.oauthService.getIdentityClaims();
+        this.reporteService.getReport(this.currentDate, userData.username)
             .subscribe((response) => {
             this.reportData = this.parseResponse(response);
         }, error => {

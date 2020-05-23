@@ -1010,7 +1010,6 @@ let ReimpresionComponent = class ReimpresionComponent {
         });
     }
     handlePrintButton(ticketData, seat) {
-        debugger;
         let printData = {
             user: this.userName,
             pelicula: ticketData.pelicula,
@@ -1026,15 +1025,17 @@ let ReimpresionComponent = class ReimpresionComponent {
             precios: ticketData.preciosCount,
             reImprecion: true
         };
-        this.ticketsService.printTickets(printData)
-            .subscribe((response) => {
-            console.log(response);
-        }, error => {
-            console.log(error);
-        });
         this.ticketsService.getValidacion(ticketData.hash)
             .subscribe((response) => {
             console.log(response);
+        }, error => {
+            this.toastr.warningToastr(error.error.message);
+            console.log(error);
+        });
+        this.ticketsService.printTickets(printData)
+            .subscribe((response) => {
+            console.log(response);
+            this.getTickets();
         }, error => {
             console.log(error);
         });

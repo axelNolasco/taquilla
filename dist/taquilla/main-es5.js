@@ -1032,7 +1032,7 @@ var ReimpresionComponent = /** @class */ (function () {
         });
     };
     ReimpresionComponent.prototype.handlePrintButton = function (ticketData, seat) {
-        debugger;
+        var _this = this;
         var printData = {
             user: this.userName,
             pelicula: ticketData.pelicula,
@@ -1048,15 +1048,17 @@ var ReimpresionComponent = /** @class */ (function () {
             precios: ticketData.preciosCount,
             reImprecion: true
         };
-        this.ticketsService.printTickets(printData)
-            .subscribe(function (response) {
-            console.log(response);
-        }, function (error) {
-            console.log(error);
-        });
         this.ticketsService.getValidacion(ticketData.hash)
             .subscribe(function (response) {
             console.log(response);
+        }, function (error) {
+            _this.toastr.warningToastr(error.error.message);
+            console.log(error);
+        });
+        this.ticketsService.printTickets(printData)
+            .subscribe(function (response) {
+            console.log(response);
+            _this.getTickets();
         }, function (error) {
             console.log(error);
         });

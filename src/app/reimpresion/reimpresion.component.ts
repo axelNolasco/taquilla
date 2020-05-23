@@ -116,6 +116,7 @@ export class ReimpresionComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+    
   }
 
  

@@ -1010,6 +1010,7 @@ let ReimpresionComponent = class ReimpresionComponent {
         });
     }
     handlePrintButton(ticketData, seat) {
+        debugger;
         let printData = {
             user: this.userName,
             pelicula: ticketData.pelicula,
@@ -1026,6 +1027,12 @@ let ReimpresionComponent = class ReimpresionComponent {
             reImprecion: true
         };
         this.ticketsService.printTickets(printData)
+            .subscribe((response) => {
+            console.log(response);
+        }, error => {
+            console.log(error);
+        });
+        this.ticketsService.getValidacion(ticketData.hash)
             .subscribe((response) => {
             console.log(response);
         }, error => {
@@ -1751,6 +1758,9 @@ let TicketsService = class TicketsService {
     }
     cancelResevacion(id) {
         return this.httpClient.delete(`${this.apiUrl}/apartados/cancelar/${id}`);
+    }
+    getValidacion(hash) {
+        return this.httpClient.get(`${this.apiUrl}/boletos/validar/${hash}`);
     }
 };
 TicketsService.ctorParameters = () => [

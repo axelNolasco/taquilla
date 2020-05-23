@@ -83,7 +83,8 @@ export class ReimpresionComponent implements OnInit {
     });
   }
 
-  public handlePrintButton(ticketData, seat) {    
+  public handlePrintButton(ticketData, seat) { 
+    debugger   
     let printData: any = {
       user: this.userName,
       pelicula: ticketData.pelicula,
@@ -100,13 +101,23 @@ export class ReimpresionComponent implements OnInit {
       reImprecion: true
     };
     
+    
     this.ticketsService.printTickets(printData)
     .subscribe((response: any) => {
       console.log(response);
     }, error => {
       console.log(error);
     });
+
+    this.ticketsService.getValidacion(ticketData.hash)
+    .subscribe((response: any) => {
+      console.log(response);
+    }, error => {
+      console.log(error);
+    });
   }
+
+ 
 
   public handleCancelarButton(seat, seatCount, user, password, motivo) {
     let deleteAll = seatCount <= 1 ? 1:0;

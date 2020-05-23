@@ -1032,6 +1032,7 @@ var ReimpresionComponent = /** @class */ (function () {
         });
     };
     ReimpresionComponent.prototype.handlePrintButton = function (ticketData, seat) {
+        debugger;
         var printData = {
             user: this.userName,
             pelicula: ticketData.pelicula,
@@ -1048,6 +1049,12 @@ var ReimpresionComponent = /** @class */ (function () {
             reImprecion: true
         };
         this.ticketsService.printTickets(printData)
+            .subscribe(function (response) {
+            console.log(response);
+        }, function (error) {
+            console.log(error);
+        });
+        this.ticketsService.getValidacion(ticketData.hash)
             .subscribe(function (response) {
             console.log(response);
         }, function (error) {
@@ -1794,6 +1801,9 @@ var TicketsService = /** @class */ (function () {
     };
     TicketsService.prototype.cancelResevacion = function (id) {
         return this.httpClient.delete(this.apiUrl + "/apartados/cancelar/" + id);
+    };
+    TicketsService.prototype.getValidacion = function (hash) {
+        return this.httpClient.get(this.apiUrl + "/boletos/validar/" + hash);
     };
     TicketsService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },

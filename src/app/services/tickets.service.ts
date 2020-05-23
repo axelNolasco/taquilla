@@ -39,4 +39,8 @@ export class TicketsService {
   public cancelResevacion(id){
     return this.httpClient.delete(`${this.apiUrl}/apartados/cancelar/${id}`);    
   }
+
+  public getValidacion(hash) {
+    return this.httpClient.get(`${this.apiUrl}/boletos/validar/${hash}`);
+  }
 }

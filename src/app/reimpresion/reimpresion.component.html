@@ -36,8 +36,8 @@
               <h3>Hora: {{ticket.hora}}</h3>
               <h3 *ngIf="ticket.user_id != 99999">Nombre: {{ticket.vendedor}}</h3>
               <h3 *ngIf="ticket.user_id == 99999">Nombre: {{ticket.usuario}}</h3>
-              <h3 *ngIf="ticket.reclamado == 0">Boleto: Disponible</h3>
-              <h3 *ngIf="ticket.reclamado == 1">Boleto: Utilizado</h3>
+              <h3 *ngIf="ticket.reclamado == 0 && ticket.user_id == 99999">Boleto: Disponible</h3>
+              <h3 *ngIf="ticket.reclamado == 1 && ticket.user_id == 99999">Boleto: Utilizado</h3>
               <div *ngFor="let seat of ticket.asientos">
                 <h4>
                   {{seat.nombre}} 

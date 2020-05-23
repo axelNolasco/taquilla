@@ -112,12 +112,12 @@ export class ReimpresionComponent implements OnInit {
     this.ticketsService.printTickets(printData)
     .subscribe((response: any) => {
       console.log(response);
-      
+      this.getTickets();      
     }, error => {
       console.log(error);
     });
 
-    this.getTickets();
+
   }
 
  

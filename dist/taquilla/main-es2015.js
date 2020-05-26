@@ -237,7 +237,7 @@ let AppComponent = class AppComponent {
         this.oauthService.tokenEndpoint = "https://taquilla.plazasanjavier.com/oauth/token";
         this.oauthService.userinfoEndpoint = "https://taquilla.plazasanjavier.com/identity";
         //this.oauthService.tokenEndpoint = "http://taquilla.localhost/oauth/token";
-        //this.oauthService.userinfoEndpoint = "http://taquilla.localhost/identity";
+        //his.oauthService.userinfoEndpoint = "http://taquilla.localhost/identity";
         this.oauthService.clientId = "taquillaClient";
         this.oauthService.scope = "openid offline_access";
         this.oauthService.dummyClientSecret = "@4816152342";
@@ -1035,10 +1035,10 @@ let ReimpresionComponent = class ReimpresionComponent {
         this.ticketsService.printTickets(printData)
             .subscribe((response) => {
             console.log(response);
+            this.getTickets();
         }, error => {
             console.log(error);
         });
-        this.getTickets();
     }
     handleCancelarButton(seat, seatCount, user, password, motivo) {
         let deleteAll = seatCount <= 1 ? 1 : 0;
@@ -1654,13 +1654,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ReporteService = class ReporteService {
-    //private apiUrl = 'http://taquilla.localhost';
     constructor(httpClient) {
         this.httpClient = httpClient;
-        this.apiUrl = 'https://taquilla.plazasanjavier.com';
+        //private apiUrl = 'https://taquilla.plazasanjavier.com';
+        this.apiUrl = 'http://taquilla.localhost';
     }
     getReport(boletoCreado, username) {
-        return this.httpClient.get(`${this.apiUrl}/reportes/ventas/dia?boleto_creado=${boletoCreado}?username=${username}`);
+        var params = "ReporteSearch%5Bboleto_creado%" + boletoCreado + "&ReporteSearch%5Busername%5D=" + username;
+        return this.httpClient.get(`${this.apiUrl}/reportes/ventas/dia?` + params);
     }
 };
 ReporteService.ctorParameters = () => [

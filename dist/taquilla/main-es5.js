@@ -240,7 +240,7 @@ var AppComponent = /** @class */ (function () {
         this.oauthService.tokenEndpoint = "https://taquilla.plazasanjavier.com/oauth/token";
         this.oauthService.userinfoEndpoint = "https://taquilla.plazasanjavier.com/identity";
         //this.oauthService.tokenEndpoint = "http://taquilla.localhost/oauth/token";
-        //this.oauthService.userinfoEndpoint = "http://taquilla.localhost/identity";
+        //his.oauthService.userinfoEndpoint = "http://taquilla.localhost/identity";
         this.oauthService.clientId = "taquillaClient";
         this.oauthService.scope = "openid offline_access";
         this.oauthService.dummyClientSecret = "@4816152342";
@@ -1058,10 +1058,10 @@ var ReimpresionComponent = /** @class */ (function () {
         this.ticketsService.printTickets(printData)
             .subscribe(function (response) {
             console.log(response);
+            _this.getTickets();
         }, function (error) {
             console.log(error);
         });
-        this.getTickets();
     };
     ReimpresionComponent.prototype.handleCancelarButton = function (seat, seatCount, user, password, motivo) {
         var _this = this;
@@ -1696,13 +1696,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ReporteService = /** @class */ (function () {
-    //private apiUrl = 'http://taquilla.localhost';
     function ReporteService(httpClient) {
         this.httpClient = httpClient;
-        this.apiUrl = 'https://taquilla.plazasanjavier.com';
+        //private apiUrl = 'https://taquilla.plazasanjavier.com';
+        this.apiUrl = 'http://taquilla.localhost';
     }
     ReporteService.prototype.getReport = function (boletoCreado, username) {
-        return this.httpClient.get(this.apiUrl + "/reportes/ventas/dia?boleto_creado=" + boletoCreado + "?username=" + username);
+        var params = "ReporteSearch%5Bboleto_creado%" + boletoCreado + "&ReporteSearch%5Busername%5D=" + username;
+        return this.httpClient.get(this.apiUrl + "/reportes/ventas/dia?" + params);
     };
     ReporteService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }

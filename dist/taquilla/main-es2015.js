@@ -1660,8 +1660,7 @@ let ReporteService = class ReporteService {
         this.apiUrl = 'http://taquilla.localhost';
     }
     getReport(boletoCreado, username) {
-        var params = "ReporteSearch%5Bboleto_creado%" + boletoCreado + "&ReporteSearch%5Busername%5D=" + username;
-        return this.httpClient.get(`${this.apiUrl}/reportes/ventas/dia?` + params);
+        return this.httpClient.get(`${this.apiUrl}/reportes/ventas/dia?boleto_creado=${boletoCreado}&username=${username}`);
     }
 };
 ReporteService.ctorParameters = () => [

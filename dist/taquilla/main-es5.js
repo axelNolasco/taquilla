@@ -1702,8 +1702,7 @@ var ReporteService = /** @class */ (function () {
         this.apiUrl = 'http://taquilla.localhost';
     }
     ReporteService.prototype.getReport = function (boletoCreado, username) {
-        var params = "ReporteSearch%5Bboleto_creado%" + boletoCreado + "&ReporteSearch%5Busername%5D=" + username;
-        return this.httpClient.get(this.apiUrl + "/reportes/ventas/dia?" + params);
+        return this.httpClient.get(this.apiUrl + "/reportes/ventas/dia?boleto_creado=" + boletoCreado + "&username=" + username);
     };
     ReporteService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }

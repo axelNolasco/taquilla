@@ -1654,10 +1654,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ReporteService = class ReporteService {
+    //private apiUrl = 'http://taquilla.localhost';
     constructor(httpClient) {
         this.httpClient = httpClient;
-        //private apiUrl = 'https://taquilla.plazasanjavier.com';
-        this.apiUrl = 'http://taquilla.localhost';
+        this.apiUrl = 'https://taquilla.plazasanjavier.com';
     }
     getReport(boletoCreado, username) {
         return this.httpClient.get(`${this.apiUrl}/reportes/ventas/dia?boleto_creado=${boletoCreado}&username=${username}`);

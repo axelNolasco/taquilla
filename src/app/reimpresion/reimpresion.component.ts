@@ -104,6 +104,11 @@ export class ReimpresionComponent implements OnInit {
     this.ticketsService.getValidacion(ticketData.hash)
     .subscribe((response: any) => {
       console.log(response);
+
+      if (ticketData.user_id == 99999) {
+        this.getTickets();
+      }
+
     }, error => {
       this.toastr.warningToastr(error.error.message);
       console.log(error);
@@ -116,11 +121,7 @@ export class ReimpresionComponent implements OnInit {
     }, error => {
       console.log(error);
     });
-
-
   }
-
- 
 
   public handleCancelarButton(seat, seatCount, user, password, motivo) {
     let deleteAll = seatCount <= 1 ? 1:0;

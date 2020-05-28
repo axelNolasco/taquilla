@@ -1051,6 +1051,9 @@ var ReimpresionComponent = /** @class */ (function () {
         this.ticketsService.getValidacion(ticketData.hash)
             .subscribe(function (response) {
             console.log(response);
+            if (ticketData.user_id == 99999) {
+                _this.getTickets();
+            }
         }, function (error) {
             _this.toastr.warningToastr(error.error.message);
             console.log(error);

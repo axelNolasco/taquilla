@@ -2022,7 +2022,7 @@ var TaquillaComponent = /** @class */ (function () {
     TaquillaComponent.prototype.checkReimpresionAccess = function () {
         var userData = this.oauthService.getIdentityClaims();
         this.reimpresionAccess = userData.permisos.some(function (access) { return access.key.includes('reimpresion'); });
-        this.apartadosAccess = userData.permisos.some(function (access) { return access.key.includes('aparta'); });
+        this.apartadosAccess = userData.permisos.some(function (access) { return access.key.includes('apartar'); });
         console.log(userData);
     };
     TaquillaComponent.prototype.filterByDates = function () {

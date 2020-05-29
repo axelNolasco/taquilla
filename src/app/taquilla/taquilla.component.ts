@@ -56,7 +56,7 @@ export class TaquillaComponent implements OnInit {
   private checkReimpresionAccess() {
     let userData: any = this.oauthService.getIdentityClaims();
     this.reimpresionAccess = userData.permisos.some(access => access.key.includes('reimpresion'));
-    this.apartadosAccess   = userData.permisos.some(access => access.key.includes('apartados'));
+    this.apartadosAccess   = userData.permisos.some(access => access.key.includes('aparta'));
     console.log(userData);
   }
 

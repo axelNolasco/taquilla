@@ -35,6 +35,7 @@ export class TaquillaComponent implements OnInit {
   public showPrintSection: boolean = false;
   public userName: string = this.oauthService.getIdentityClaims()['username'];
   public reimpresionAccess: boolean = true;
+  public apartadosAccess: boolean = true;
   public filteredPeliculas: any;
   
   constructor(
@@ -55,6 +56,7 @@ export class TaquillaComponent implements OnInit {
   private checkReimpresionAccess() {
     let userData: any = this.oauthService.getIdentityClaims();
     this.reimpresionAccess = userData.permisos.some(access => access.key.includes('reimpresion'));
+    this.apartadosAccess   = userData.permisos.some(access => access.key.includes('apartados'));
   }
 
   private filterByDates() {
@@ -64,8 +66,6 @@ export class TaquillaComponent implements OnInit {
         return element;
       }
     })
-
-    
   }
 
   private getPeliculas(date) {

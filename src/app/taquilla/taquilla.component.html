@@ -31,6 +31,7 @@
         mat-menu-item
         routerLink="/cambio" class="display-block-btn">Cambio de boleto</button>
         <button
+        *ngIf="apartadosAccess"
         mat-menu-item
         routerLink="/reservaciones" class="display-block-btn">Reservaciones</button>
         <button

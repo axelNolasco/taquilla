@@ -2023,6 +2023,7 @@ var TaquillaComponent = /** @class */ (function () {
         var userData = this.oauthService.getIdentityClaims();
         this.reimpresionAccess = userData.permisos.some(function (access) { return access.key.includes('reimpresion'); });
         this.apartadosAccess = userData.permisos.some(function (access) { return access.key.includes('apartados'); });
+        console.log(userData);
     };
     TaquillaComponent.prototype.filterByDates = function () {
         var currentDate = new Date();

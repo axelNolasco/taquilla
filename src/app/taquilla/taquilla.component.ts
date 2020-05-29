@@ -57,6 +57,7 @@ export class TaquillaComponent implements OnInit {
     let userData: any = this.oauthService.getIdentityClaims();
     this.reimpresionAccess = userData.permisos.some(access => access.key.includes('reimpresion'));
     this.apartadosAccess   = userData.permisos.some(access => access.key.includes('apartados'));
+    console.log(userData);
   }
 
   private filterByDates() {

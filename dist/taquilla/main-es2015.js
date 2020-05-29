@@ -1975,6 +1975,7 @@ let TaquillaComponent = class TaquillaComponent {
         let userData = this.oauthService.getIdentityClaims();
         this.reimpresionAccess = userData.permisos.some(access => access.key.includes('reimpresion'));
         this.apartadosAccess = userData.permisos.some(access => access.key.includes('apartados'));
+        console.log(userData);
     }
     filterByDates() {
         let currentDate = new Date();

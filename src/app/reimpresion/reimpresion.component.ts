@@ -32,8 +32,10 @@ export class ReimpresionComponent implements OnInit {
   public ticketsFound: any[];
   public showSearchResults: boolean = false;
   public showPrintSection: boolean = false;
+  public imprimirCodigo: boolean = true;
   public userTickets: any;
   public userName: string = this.oauthService.getIdentityClaims()['username'];
+
 
   constructor(
     private ticketsService: TicketsService,
@@ -45,7 +47,15 @@ export class ReimpresionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.checkPermisos();
     this.getCurrentUserTickets();
+  }
+
+  private checkPermisos() {
+    let userData: any = this.oauthService.getIdentityClaims();
+    this.imprimirCodigo = userData.permisos.some(access => access.key.includes('impresionCodigo'));
+    
+    console.log(userData);
   }
 
   private getCurrentUserTickets() {

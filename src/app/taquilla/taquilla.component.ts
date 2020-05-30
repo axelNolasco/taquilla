@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { ToastrManager } from 'ng6-toastr-notifications';
 
+
 @Component({
   selector: 'app-taquilla',
   templateUrl: './taquilla.component.html',
@@ -49,11 +50,11 @@ export class TaquillaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.checkReimpresionAccess();
+    this.checkPermisos();
     this.getPeliculas('');
     this.getFechas();
   }
-  private checkReimpresionAccess() {
+  private checkPermisos() {
     let userData: any = this.oauthService.getIdentityClaims();
     this.reimpresionAccess = userData.permisos.some(access => access.key.includes('reimpresion'));
     this.apartadosAccess   = userData.permisos.some(access => access.key.includes('apartar'));

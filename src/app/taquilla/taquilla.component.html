@@ -28,6 +28,7 @@
       <button mat-button [matMenuTriggerFor]="menu" class="setting-btn complejo">Menu</button>
       <mat-menu #menu="matMenu">
         <button
+        *ngIf="cambioAccess"
         mat-menu-item
         routerLink="/cambio" class="display-block-btn">Cambio de boleto</button>
         <button

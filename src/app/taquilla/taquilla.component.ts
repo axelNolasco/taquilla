@@ -37,6 +37,7 @@ export class TaquillaComponent implements OnInit {
   public userName: string = this.oauthService.getIdentityClaims()['username'];
   public reimpresionAccess: boolean = true;
   public apartadosAccess: boolean = true;
+  public cambioAccess: boolean = true;
   public filteredPeliculas: any;
   
   constructor(
@@ -58,6 +59,7 @@ export class TaquillaComponent implements OnInit {
     let userData: any = this.oauthService.getIdentityClaims();
     this.reimpresionAccess = userData.permisos.some(access => access.key.includes('reimpresion'));
     this.apartadosAccess   = userData.permisos.some(access => access.key.includes('apartar'));
+    this.cambioAccess      = userData.permisos.some(access => access.key.includes('cambio'));
     console.log(userData);
   }
 

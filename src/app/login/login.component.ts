@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
       console.log(this.form);
       this.error = false;
       this.errorMessage = '';
+      
       this.oauthService.fetchTokenUsingPasswordFlow(this.form.value.username, this.form.value.password)
       .then((resp) => {
         console.log(resp);

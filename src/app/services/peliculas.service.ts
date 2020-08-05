@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class PeliculasService {
-  private apiUrl = 'https://mobile.plazasanjavier.com';
-  //private apiUrl = 'http://mobile.localhost';
+  //private apiUrl = 'https://mobile.plazasanjavier.com';
+  private apiUrl = 'http://mobile.localhost';
 
   constructor(
     private httpClient: HttpClient

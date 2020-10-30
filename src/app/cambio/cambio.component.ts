@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { OAuthService } from 'angular-oauth2-oidc';
 
+
 @Component({
   selector: 'app-cambio',
   templateUrl: './cambio.component.html',
@@ -189,19 +190,21 @@ export class CambioComponent implements OnInit {
   }
 
   public handlePrintButton() {
-    //this.cancelarBoleto();
+    this.cancelarBoleto();
   }
 
-  /*private cancelarBoleto() {
+  private cancelarBoleto() {
     let deleteAll = this.seatCount <= 1 ? 1:0;
-    this.cancelarService.cancelTicket(this.seatToChage.id_relacion_boleto, deleteAll)
+    this.cancelarService.changueTicket(this.seatToChage.id_relacion_boleto, deleteAll)
     .subscribe((response: any) => {
       this.payTickets();
     }, error => {
       console.log(error);
       return false;
     }); 
-  }*/
+
+    this.handleResetButton();
+  }
 
   
   public handleCambioButtonCode(seat, seatCount) {

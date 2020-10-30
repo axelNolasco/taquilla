@@ -22,4 +22,8 @@ export class CancelarService {
 
     return this.httpClient.post(`${this.apiUrl}/boletos/cancelar/${boletoAsientoId}/${delelteAll}`, data);
   }
+
+  public changueTicket(boletoAsientoId, delelteAll) {
+    return this.httpClient.post(`${this.apiUrl}/boletos/cambio/${boletoAsientoId}/${delelteAll}`, []);
+  }
 }

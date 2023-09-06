@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CancelarService {
-  private apiUrl = 'https://taquilla.plazasanjavier.com';
+  private apiUrl = environment.apiURL;
   //private apiUrl = 'http://taquilla.localhost';
-  
+
   constructor(
     private httpClient: HttpClient
   ) { }

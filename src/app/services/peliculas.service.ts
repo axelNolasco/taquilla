@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class PeliculasService {
-  private apiUrl = 'https://mobile.plazasanjavier.com';
+  private apiUrl = environment.privateAPIURL;
   //private apiUrl = 'http://mobile.localhost';
 
   constructor(

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { OAuthService } from 'angular-oauth2-oidc';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TicketsService {
-  private apiUrl = 'https://taquilla.plazasanjavier.com';
+  private apiUrl = environment.apiURL;
   //private apiUrl = 'http://taquilla.localhost';
 
   constructor(
@@ -36,8 +37,8 @@ export class TicketsService {
     return this.httpClient.get(`${this.apiUrl}/apartados`);
   }
 
-  public cancelResevacion(id){
-    return this.httpClient.delete(`${this.apiUrl}/apartados/cancelar/${id}`);    
+  public cancelResevacion(id) {
+    return this.httpClient.delete(`${this.apiUrl}/apartados/cancelar/${id}`);
   }
 
   public getValidacion(hash) {

@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  privateAPIURL: 'https://mobile.plazasanjavier.com',
+  apiURL: 'https://api.plazasanjavier.com'
 };

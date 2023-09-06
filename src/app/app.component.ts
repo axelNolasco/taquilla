@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,8 @@ export class AppComponent {
   title = 'taquilla';
 
   constructor(private oauthService: OAuthService) {
-    this.oauthService.tokenEndpoint = "https://taquilla.plazasanjavier.com/oauth/token";
-    this.oauthService.userinfoEndpoint = "https://taquilla.plazasanjavier.com/identity";
+    this.oauthService.tokenEndpoint = environment.apiURL + '/oauth/token';
+    this.oauthService.userinfoEndpoint = environment.apiURL + "/identity";
     //this.oauthService.tokenEndpoint = "http://taquilla.localhost/oauth/token";
     //this.oauthService.userinfoEndpoint = "http://taquilla.localhost/identity";
     this.oauthService.clientId = "taquillaClient";
